@@ -1,0 +1,55 @@
+<view class="page">
+  <view wx:if="{{step === 'login'}}" class="login-stage">
+    <view class="brand-wrap">
+      <view class="brand-icon">⌂</view>
+      <view class="brand-name">邻舍</view>
+      <view class="tagline">让闲置在校园里流动起来 🌿</view>
+      <view class="intro">与身边同学安心交易，每一次循环都是对地球的一份温柔</view>
+    </view>
+    <view class="login-actions">
+      <view class="auth-button wechat" bindtap="startVerify"><text class="auth-icon">☘</text><text>微信一键登录</text></view>
+      <view class="auth-button apple" bindtap="startVerify"><text class="auth-icon">●</text><text>通过 Apple 登录</text></view>
+      <view class="phone" bindtap="phoneLogin">使用手机号登录</view>
+      <view class="agreement" bindtap="toggleAgree">
+        <view class="checkbox {{agreed ? 'checked' : ''}}"><text wx:if="{{agreed}}">✓</text></view>
+        <text>我已阅读并同意</text>
+        <text class="link">《用户协议》</text>
+        <text>和</text>
+        <text class="link">《隐私政策》</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="verify-stage">
+    <scroll-view class="verify-content" scroll-y>
+      <view class="verify-hero">
+        <view class="shield">♢</view>
+        <view class="hero-title">加入互信校园社区</view>
+        <view class="hero-desc">完成学生认证，与真实校友安心交易，享受专属保障</view>
+      </view>
+      <view class="features">
+        <view>📧 邮箱验证</view>
+        <view>🪪 证件核验</view>
+        <view>🔒 信息加密</view>
+      </view>
+      <view class="form-card">
+        <view class="field">
+          <label>校园邮箱</label>
+          <view class="input-row">✉ <input value="{{email}}" bindinput="onEmailInput" placeholder="请输入 edu.cn 校园邮箱" /></view>
+        </view>
+        <view class="code-row">
+          <input value="{{code}}" bindinput="onCodeInput" placeholder="输入6位验证码" />
+          <button bindtap="sendCode">发送验证码</button>
+        </view>
+      </view>
+      <view class="divider"><text></text><view>或上传证件</view><text></text></view>
+      <view class="upload" bindtap="uploadCard">
+        <view class="upload-icon">⇧</view>
+        <view class="upload-title">上传学生证或录取通知书</view>
+        <view class="upload-desc">支持 JPG、PNG · 照片经过加密处理，安全可靠</view>
+      </view>
+      <view class="verify-button {{email && code ? 'ready' : ''}}" bindtap="submitVerify">立即验证 →</view>
+      <view class="privacy">认证信息仅用于身份核验，不会公开展示。<text>了解隐私政策</text></view>
+    </scroll-view>
+  </view>
+</view>

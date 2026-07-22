@@ -1,0 +1,56 @@
+# WeChat Developer Tools local configuration
+project.private.config.json
+
+# Environment variables and sensitive configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Node.js dependencies
+node_modules/
+miniprogram_npm/
+
+# Package-manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build, cache, and temporary files
+dist/
+build/
+coverage/
+.cache/
+.temp/
+temp/
+tmp/
+*.tmp
+*.log
+
+# Editor settings
+.vscode/
+.idea/
+*.code-workspace
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archives and local backups
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.bak
+*.backup
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3

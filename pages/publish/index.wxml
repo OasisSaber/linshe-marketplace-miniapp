@@ -1,0 +1,59 @@
+<view class="page">
+  <view wx:if="{{!isVerified}}" class="notice card">
+    <text>完成学生认证后才能发布和收款。</text>
+    <button class="primary-button" bindtap="goVerify">去认证</button>
+  </view>
+
+  <view class="photo-row card">
+    <view class="photo-add">＋<text>添加图片</text></view>
+    <view class="photo-cover">🧹<text>封面</text></view>
+    <view class="photo-empty">＋</view>
+    <view class="photo-empty">＋</view>
+  </view>
+
+  <view class="form">
+    <input value="{{form.title}}" bindinput="onTitleInput" placeholder="商品标题（5-30字，描述清晰更好卖）" />
+    <textarea placeholder="描述成色、使用情况、附件配件等（10字以上），让买家更放心～" />
+    <view class="price-input">
+      <text>¥</text>
+      <input value="{{form.price}}" bindinput="onPriceInput" placeholder="设置价格" type="digit" />
+    </view>
+
+    <view class="field card">
+      <text class="field-label">分类</text>
+      <view class="chips">
+        <block wx:for="{{categories}}" wx:key="*this">
+          <view class="chip {{activeCategory === item ? 'active' : ''}}" data-value="{{item}}" bindtap="selectCategory">{{item}}</view>
+        </block>
+      </view>
+    </view>
+
+    <view class="field card">
+      <text class="field-label">成色</text>
+      <view class="chips condition-chips">
+        <block wx:for="{{conditions}}" wx:key="*this">
+          <view class="condition-chip {{activeCondition === item ? 'active' : ''}}" data-value="{{item}}" bindtap="selectCondition">{{item}}</view>
+        </block>
+      </view>
+    </view>
+
+    <view class="location-row card">
+      <view class="location-icon">⌖</view>
+      <view>
+        <text class="location-title">宿舍楼A · 3号楼218室</text>
+        <text class="location-sub">GPS自动定位</text>
+      </view>
+    </view>
+
+    <view class="switch-row card">
+      <view>
+        <text class="location-title">支持校内面交</text>
+        <text class="location-sub">开启后买家可选择校园内安全地点当面交易</text>
+      </view>
+      <switch checked color="#22C55E" />
+    </view>
+
+    <button class="primary-button publish-button" bindtap="submit">🚀 立即发布</button>
+    <text class="publish-note">仅对已认证校园学生可见</text>
+  </view>
+</view>

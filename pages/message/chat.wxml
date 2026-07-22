@@ -1,0 +1,53 @@
+<view class="page">
+  <view class="header">
+    <view class="top-row">
+      <button class="icon-btn" bindtap="goBack">‹</button>
+      <view class="peer-main">
+        <view class="peer-line">
+          <view class="peer-avatar">{{peer.avatar}}</view>
+          <view class="peer-text">
+            <view class="peer-name">{{peer.name}}</view>
+            <view class="peer-status">{{peer.status}}</view>
+          </view>
+        </view>
+      </view>
+      <button class="icon-btn" bindtap="callPeer">☎</button>
+      <button class="icon-btn" bindtap="openMore">⋯</button>
+    </view>
+
+    <view class="goods-strip">
+      <view class="goods-thumb">{{item.emoji}}</view>
+      <view class="goods-main">
+        <view class="goods-title">{{item.title}}</view>
+        <view class="goods-price">¥{{item.price}}</view>
+      </view>
+      <view class="trade-actions">
+        <button class="outline" bindtap="openOffer">出价</button>
+        <button class="buy" bindtap="buyNow">购买</button>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view class="messages" scroll-y scroll-into-view="bottom-anchor">
+    <block wx:for="{{messages}}" wx:key="id">
+      <view wx:if="{{item.side === 'time'}}" class="time-pill">{{item.text}}</view>
+      <view wx:elif="{{item.side === 'peer'}}" class="msg-row peer">
+        <view class="small-avatar">{{peer.avatar}}</view>
+        <view class="bubble peer-bubble">{{item.text}}</view>
+      </view>
+      <view wx:else class="msg-row me">
+        <view class="bubble me-bubble">{{item.text}}</view>
+      </view>
+    </block>
+    <view id="bottom-anchor"></view>
+  </scroll-view>
+
+  <view class="composer">
+    <button class="plus" bindtap="openTools">＋</button>
+    <view class="input-box">
+      <input value="{{draft}}" bindinput="onInput" confirm-type="send" bindconfirm="sendMessage" placeholder="发送消息…" />
+      <text>⌑</text>
+    </view>
+    <button class="send" bindtap="sendMessage">➤</button>
+  </view>
+</view>

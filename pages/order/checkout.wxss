@@ -1,0 +1,246 @@
+@import "../../styles/tokens.wxss";
+
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.content {
+  height: calc(100vh - 130rpx);
+}
+
+.card {
+  margin: 24rpx 28rpx 0;
+  padding: 28rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 24rpx;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.label {
+  color: var(--color-brand);
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.location-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18rpx;
+}
+
+.location-title {
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.muted {
+  margin-top: 8rpx;
+  color: var(--color-muted);
+  font-size: 24rpx;
+}
+
+.chevron {
+  color: var(--color-muted);
+  font-size: 34rpx;
+}
+
+.soft-btn {
+  height: 64rpx;
+  margin: 22rpx 0 0;
+  border: 0;
+  border-radius: 20rpx;
+  background: var(--color-brand-soft);
+  color: #15803d;
+  font-size: 24rpx;
+  font-weight: 800;
+  line-height: 64rpx;
+}
+
+.section-title {
+  font-size: 26rpx;
+  font-weight: 800;
+}
+
+.goods-row {
+  display: flex;
+  gap: 22rpx;
+  margin-top: 22rpx;
+}
+
+.thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 118rpx;
+  height: 118rpx;
+  border-radius: 22rpx;
+  background: #0f2027;
+  text-align: center;
+  line-height: 1;
+  font-size: 52rpx;
+}
+
+.goods-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.goods-title {
+  font-size: 26rpx;
+  font-weight: 800;
+  line-height: 34rpx;
+}
+
+.condition {
+  display: inline-block;
+  margin-top: 12rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 999rpx;
+  background: var(--color-brand-soft);
+  color: #15803d;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.goods-price {
+  margin-top: 12rpx;
+  color: var(--color-brand);
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.seller-row {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  margin-top: 24rpx;
+  padding-top: 22rpx;
+  border-top: 1rpx solid var(--color-border);
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38rpx;
+  height: 38rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-dark));
+  color: #ffffff;
+  text-align: center;
+  line-height: 1;
+  font-size: 20rpx;
+  font-weight: 900;
+}
+
+.seller-name {
+  color: var(--color-muted);
+  font-size: 24rpx;
+}
+
+.verified {
+  margin-left: auto;
+  color: var(--color-warn);
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.fee-row,
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fee-row {
+  margin-top: 22rpx;
+  color: var(--color-muted);
+  font-size: 25rpx;
+}
+
+.fee-row text:last-child {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.fee-row .green,
+.green {
+  color: var(--color-brand) !important;
+}
+
+.divider {
+  height: 1rpx;
+  margin: 22rpx 0;
+  background: var(--color-border);
+}
+
+.total-row {
+  font-size: 28rpx;
+  font-weight: 900;
+}
+
+.total-row text:last-child {
+  color: var(--color-brand);
+  font-size: 34rpx;
+}
+
+.notice {
+  display: flex;
+  gap: 18rpx;
+  padding: 24rpx 28rpx 40rpx;
+  color: var(--color-muted);
+  font-size: 22rpx;
+  line-height: 34rpx;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 8rpx;
+  background: var(--color-brand);
+  color: #ffffff;
+  text-align: center;
+  line-height: 1;
+}
+
+.bottom-bar {
+  height: 130rpx;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 12rpx 28rpx;
+  border-top: 1rpx solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.pay-label {
+  color: var(--color-muted);
+  font-size: 22rpx;
+}
+
+.pay-price {
+  color: var(--color-brand);
+  font-size: 34rpx;
+  font-weight: 900;
+}
+
+.bottom-bar button {
+  flex: 1;
+  height: 92rpx;
+  margin: 0;
+  border: 0;
+  border-radius: 24rpx;
+  background: var(--color-brand);
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 8rpx 18rpx rgba(34, 197, 94, 0.35);
+}

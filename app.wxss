@@ -1,0 +1,73 @@
+@import "./styles/tokens.wxss";
+
+page {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 28rpx 28rpx 56rpx;
+}
+
+.card {
+  box-sizing: border-box;
+  border: 1rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.section-title {
+  display: block;
+  margin: 0 0 18rpx;
+  font-size: 34rpx;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  border-radius: 999rpx;
+  color: #fff;
+  background: var(--color-brand);
+  font-size: 30rpx;
+  font-weight: 800;
+  line-height: 1;
+}
+
+button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box;
+  padding: 0;
+  line-height: 1 !important;
+  text-align: center;
+  vertical-align: middle;
+}
+
+button::after {
+  border: 0;
+}
+
+.text-center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button text,
+button view {
+  line-height: 1;
+}

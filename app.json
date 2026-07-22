@@ -1,0 +1,68 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/community/index",
+    "pages/publish/index",
+    "pages/message/index",
+    "pages/message/chat",
+    "pages/profile/index",
+    "pages/auth/login",
+    "pages/goods/detail",
+    "pages/goods/offer",
+    "pages/order/checkout",
+    "pages/order/detail",
+    "pages/search/filter",
+    "pages/favorites/index",
+    "pages/wallet/index",
+    "pages/safety/index",
+    "pages/seller/store",
+    "pages/publish/success"
+  ],
+  "window": {
+    "navigationBarTitleText": "邻舍",
+    "navigationBarBackgroundColor": "#F7F8FA",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F7F8FA"
+  },
+  "tabBar": {
+    "color": "#6B6E85",
+    "selectedColor": "#22C55E",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tabbar/home.png",
+        "selectedIconPath": "images/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/community/index",
+        "text": "圈子",
+        "iconPath": "images/tabbar/community.png",
+        "selectedIconPath": "images/tabbar/community-active.png"
+      },
+      {
+        "pagePath": "pages/publish/index",
+        "text": "发布",
+        "iconPath": "images/tabbar/publish.png",
+        "selectedIconPath": "images/tabbar/publish-active.png"
+      },
+      {
+        "pagePath": "pages/message/index",
+        "text": "消息",
+        "iconPath": "images/tabbar/message.png",
+        "selectedIconPath": "images/tabbar/message-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "images/tabbar/profile.png",
+        "selectedIconPath": "images/tabbar/profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

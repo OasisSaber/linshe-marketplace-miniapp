@@ -1,0 +1,30 @@
+<view class="page" wx:if="{{item}}">
+  <view class="hero">
+    <button class="floating-btn right" bindtap="toggleFavorite">{{favorited ? '♥' : '♡'}}</button>
+    <text class="hero-emoji">{{item.images[0]}}</text>
+  </view>
+
+  <view class="item-summary">
+    <view class="price">¥{{item.price}}</view>
+    <view class="title">{{item.title}}</view>
+    <view class="sub">{{item.condition}} · 配件齐全</view>
+  </view>
+
+  <view class="mask"></view>
+
+  <view class="sheet">
+    <view class="handle"></view>
+    <view class="sheet-title">发起出价</view>
+    <view class="sheet-sub">卖家标价 ¥{{sellerPrice}}</view>
+    <view class="amount-row">
+      <text class="currency">¥</text>
+      <input class="amount-input" type="number" value="{{offerPrice}}" bindinput="onPriceInput" />
+    </view>
+    <view class="amount-line"></view>
+    <view class="hint">建议出价在原价 7 折以上 · 卖家将在24h内回应</view>
+    <view class="sheet-actions">
+      <button class="ghost" bindtap="goBack">取消</button>
+      <button class="primary" bindtap="submitOffer">发送出价</button>
+    </view>
+  </view>
+</view>

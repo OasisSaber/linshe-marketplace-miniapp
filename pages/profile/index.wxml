@@ -1,0 +1,47 @@
+<view class="page">
+  <scroll-view class="content" scroll-y>
+    <view class="profile-head">
+      <view class="avatar-wrap">
+        <view class="avatar">李</view>
+      </view>
+      <view class="verify {{isVerified ? 'verified' : ''}}" bindtap="goVerify">
+        <text>{{isVerified ? '✓' : '⌾'}}</text>
+        <text>{{isVerified ? '已学生认证' : '去学生认证'}}</text>
+      </view>
+      <view class="name">李同学</view>
+      <view class="school">北京大学 · 信息管理学院 大三</view>
+      <view class="stats">
+        <view wx:for="{{stats}}" wx:key="label" class="stat">
+          <view>{{item.value}}</view>
+          <text>{{item.label}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="member-card" bindtap="openWallet">
+      <view>
+        <view class="member-title">🌿 绿色会员</view>
+        <view class="member-sub">环保交易积分</view>
+      </view>
+      <view class="points">积分×<text>320</text></view>
+    </view>
+
+    <view class="shortcut-card">
+      <view wx:for="{{shortcuts}}" wx:key="label" class="shortcut" data-url="{{item.url}}" bindtap="openShortcut">
+        <view class="shortcut-icon">
+          <text>□</text>
+          <text class="dot">{{item.count}}</text>
+        </view>
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="menu-card">
+      <view wx:for="{{menu}}" wx:key="label" class="menu-row" data-url="{{item.url}}" bindtap="openMenu">
+        <text class="menu-icon">{{item.icon}}</text>
+        <text class="menu-label">{{item.label}}</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

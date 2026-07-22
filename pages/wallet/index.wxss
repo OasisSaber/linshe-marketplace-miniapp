@@ -1,0 +1,167 @@
+@import "../../styles/tokens.wxss";
+
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.content {
+  height: 100vh;
+}
+
+.balance-card {
+  margin: 28rpx;
+  padding: 36rpx;
+  border-radius: 28rpx;
+  background: linear-gradient(151deg, var(--color-brand), var(--color-brand-dark));
+  color: #ffffff;
+  box-shadow: 0 16rpx 24rpx rgba(34, 197, 94, 0.32);
+}
+
+.balance-label {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 24rpx;
+}
+
+.balance {
+  margin-top: 10rpx;
+  font-size: 70rpx;
+  font-weight: 900;
+}
+
+.wallet-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.wallet-action {
+  flex: 1;
+  height: 80rpx;
+  margin: 0;
+  border: 0;
+  border-radius: 24rpx;
+  background: #ffffff;
+  color: #15803d;
+  font-size: 28rpx;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.wallet-action.recharge {
+  border: 1rpx solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+.stat-card {
+  display: flex;
+  margin: 0 28rpx;
+  padding: 26rpx 0;
+  border: 1rpx solid var(--color-border);
+  border-radius: 24rpx;
+  background: #ffffff;
+}
+
+.stat {
+  flex: 1;
+  border-right: 1rpx solid var(--color-border);
+  text-align: center;
+}
+
+.stat:last-child {
+  border-right: 0;
+}
+
+.stat view {
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.stat text {
+  color: var(--color-muted);
+  font-size: 22rpx;
+}
+
+.section-title {
+  padding: 30rpx 28rpx 12rpx;
+  font-size: 28rpx;
+  font-weight: 900;
+}
+
+.bill-card {
+  margin: 0 28rpx 32rpx;
+  overflow: hidden;
+  border: 1rpx solid var(--color-border);
+  border-radius: 24rpx;
+  background: #ffffff;
+}
+
+.bill-row {
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  padding: 24rpx;
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.bill-row:last-child {
+  border-bottom: 0;
+}
+
+.bill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 1;
+  font-size: 28rpx;
+}
+
+.bill-icon.in {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}
+
+.bill-icon.out {
+  background: #edeef2;
+  color: var(--color-muted);
+}
+
+.bill-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.bill-main view {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+  font-weight: 800;
+}
+
+.bill-main text {
+  color: var(--color-muted);
+  font-size: 22rpx;
+}
+
+.amount {
+  font-size: 28rpx;
+  font-weight: 900;
+}
+
+.amount.in {
+  color: var(--color-brand);
+}
+
+.amount.out {
+  color: var(--color-text);
+}

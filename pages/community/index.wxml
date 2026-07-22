@@ -1,0 +1,37 @@
+<view class="page">
+  <view class="header">
+    <view class="top">
+      <text class="title">北大圈子</text>
+      <button bindtap="createPost">+ 发帖</button>
+    </view>
+    <view class="segment">
+      <view class="{{activeTab === '关注' ? 'active' : ''}}" data-tab="关注" bindtap="setTab">关注</view>
+      <view class="{{activeTab === '校区' ? 'active' : ''}}" data-tab="校区" bindtap="setTab">校区</view>
+    </view>
+  </view>
+
+  <scroll-view class="feed" scroll-y>
+    <view wx:for="{{posts}}" wx:key="id" class="post-card">
+      <view class="post-head">
+        <text class="avatar avatar-{{item.color}}">{{item.avatar}}</text>
+        <view class="author">
+          <view>{{item.user}}</view>
+          <text>{{item.time}}</text>
+        </view>
+        <button class="follow {{item.followed ? 'active' : ''}}" data-id="{{item.id}}" bindtap="toggleFollow">{{item.followed ? '已关注' : '关注'}}</button>
+        <text class="more" data-id="{{item.id}}" bindtap="openPostMore">···</text>
+      </view>
+      <view class="content">{{item.content}}</view>
+      <view wx:if="{{item.images.length}}" class="image-grid">
+        <view wx:for="{{item.images}}" wx:for-item="photo" wx:key="emoji" class="photo photo-{{photo.bg}}">
+          <text>{{photo.emoji}}</text>
+        </view>
+      </view>
+      <view class="post-actions">
+        <text class="{{item.liked ? 'liked' : ''}}" data-id="{{item.id}}" bindtap="toggleLike">{{item.liked ? '♥' : '♡'}} 点赞 {{item.likes}}</text>
+        <text data-id="{{item.id}}" bindtap="commentPost">◌ 评论 {{item.comments}}</text>
+        <text data-id="{{item.id}}" bindtap="sharePost">↗ 分享 {{item.shares}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

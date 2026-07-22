@@ -1,0 +1,257 @@
+@import "../../styles/tokens.wxss";
+
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.header {
+  background: #ffffff;
+  border-bottom: 1rpx solid var(--color-border);
+}
+
+.top-row {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  padding: 18rpx 24rpx 14rpx;
+}
+
+.icon-btn,
+.plus,
+.send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62rpx;
+  height: 62rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 20rpx;
+  background: #edeef2;
+  color: var(--color-muted);
+  line-height: 1;
+  font-size: 28rpx;
+}
+
+.peer-avatar,
+.small-avatar {
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  color: #ffffff;
+  text-align: center;
+  font-weight: 900;
+}
+
+.peer-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 66rpx;
+  height: 66rpx;
+  line-height: 1;
+  font-size: 26rpx;
+}
+
+.peer-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.peer-line {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  min-width: 0;
+}
+
+.peer-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.peer-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 28rpx;
+  font-weight: 900;
+}
+
+.peer-status {
+  margin-top: 2rpx;
+  color: var(--color-brand);
+  font-size: 21rpx;
+  white-space: nowrap;
+}
+
+.goods-strip {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  margin: 0 24rpx 18rpx;
+  padding: 14rpx 18rpx;
+  border-radius: 20rpx;
+  background: #edeef2;
+}
+
+.goods-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 74rpx;
+  height: 74rpx;
+  border-radius: 16rpx;
+  background: #0f2027;
+  text-align: center;
+  line-height: 1;
+  font-size: 34rpx;
+}
+
+.goods-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.goods-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.goods-price {
+  color: var(--color-brand);
+  font-size: 24rpx;
+  font-weight: 900;
+}
+
+.trade-actions {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex: 0 0 auto;
+}
+
+.outline,
+.buy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 84rpx;
+  height: 48rpx;
+  margin: 0;
+  padding: 0 18rpx;
+  border-radius: 18rpx;
+  font-size: 22rpx;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.outline {
+  border: 1rpx solid var(--color-border);
+  background: transparent;
+  color: var(--color-muted);
+}
+
+.buy {
+  border: 0;
+  background: var(--color-brand);
+  color: #ffffff;
+}
+
+.messages {
+  flex: 1;
+  min-height: 0;
+  padding: 20rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.time-pill {
+  width: fit-content;
+  margin: 8rpx auto 26rpx;
+  padding: 8rpx 22rpx;
+  border-radius: 999rpx;
+  background: #edeef2;
+  color: var(--color-muted);
+  font-size: 22rpx;
+}
+
+.msg-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 14rpx;
+  margin-bottom: 18rpx;
+}
+
+.msg-row.me {
+  justify-content: flex-end;
+}
+
+.small-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54rpx;
+  height: 54rpx;
+  line-height: 1;
+  font-size: 22rpx;
+}
+
+.bubble {
+  max-width: 470rpx;
+  padding: 20rpx 24rpx;
+  font-size: 26rpx;
+  line-height: 38rpx;
+}
+
+.peer-bubble {
+  border: 1rpx solid var(--color-border);
+  border-radius: 8rpx 26rpx 26rpx 26rpx;
+  background: #ffffff;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+
+.me-bubble {
+  border-radius: 26rpx 8rpx 26rpx 26rpx;
+  background: var(--color-brand);
+  color: #ffffff;
+  box-shadow: 0 4rpx 8rpx rgba(34, 197, 94, 0.25);
+}
+
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 16rpx 24rpx 24rpx;
+  border-top: 1rpx solid var(--color-border);
+  background: #ffffff;
+}
+
+.input-box {
+  flex: 1;
+  min-width: 0;
+  height: 66rpx;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  padding: 0 20rpx;
+  border-radius: 24rpx;
+  background: #edeef2;
+}
+
+.input-box input {
+  flex: 1;
+  min-width: 0;
+  height: 66rpx;
+  font-size: 26rpx;
+}
+
+.input-box text {
+  color: var(--color-muted);
+}

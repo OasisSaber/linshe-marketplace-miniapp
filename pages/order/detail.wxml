@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="status-hero">
+    <view class="status-icon">📦</view>
+    <view>
+      <text class="status-title">{{verified ? '交易完成' : '等待校内面交'}}</text>
+      <text class="status-sub">今天下午3点 · {{order.meetup_location}}</text>
+    </view>
+  </view>
+
+  <view class="timeline card">
+    <text class="card-title">订单状态</text>
+    <block wx:for="{{timeline}}" wx:key="title">
+      <view class="timeline-row {{item.state}}">
+        <view class="dot"></view>
+        <view>
+          <text class="timeline-title">{{item.title}}</text>
+          <text class="timeline-time">{{item.time}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="location-card card">
+    <text class="card-title">⌖ 交易地点</text>
+    <view class="map">
+      <text>宿舍区</text>
+      <text>图书馆</text>
+      <text>教学楼</text>
+    </view>
+    <text class="place">图书馆南门</text>
+    <text class="meta">步行约3分钟 · 监控覆盖 · 平台认证安全点</text>
+  </view>
+
+  <view class="qr card">
+    <text class="qr-text">收货验证码</text>
+    <text class="qr-sub">面交时出示此码，卖家扫码确认交收</text>
+    <view class="qr-box">▦</view>
+    <text class="valid">验证码有效 · 04:28</text>
+  </view>
+
+  <view class="bottom-actions">
+    <button class="contact" bindtap="contactSeller">联系卖家</button>
+    <button class="confirm" bindtap="verify">{{verified ? '已确认' : '确认收货'}}</button>
+  </view>
+</view>

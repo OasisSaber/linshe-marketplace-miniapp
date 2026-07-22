@@ -1,0 +1,58 @@
+<view class="page" wx:if="{{item}}">
+  <scroll-view class="content" scroll-y>
+    <view class="card location-card">
+      <view class="label">⌖ 校内面交地点</view>
+      <view class="location-row">
+        <view>
+          <view class="location-title">{{meetupLocation}}</view>
+          <view class="muted">平台认证安全交易地点 · 有监控</view>
+        </view>
+        <text class="chevron">›</text>
+      </view>
+      <button class="soft-btn" bindtap="chooseLocation">选择校内交易地点</button>
+    </view>
+
+    <view class="card">
+      <view class="section-title">商品信息</view>
+      <view class="goods-row">
+        <view class="thumb">{{item.images[0]}}</view>
+        <view class="goods-main">
+          <view class="goods-title">{{item.title}}</view>
+          <text class="condition">{{item.condition}}</text>
+          <view class="goods-price">¥{{dealPrice}}</view>
+        </view>
+      </view>
+      <view class="seller-row">
+        <text class="avatar">王</text>
+        <text class="seller-name">王同学</text>
+        <text class="verified">学生认证</text>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="section-title">费用明细</view>
+      <view wx:for="{{feeRows}}" wx:key="label" class="fee-row">
+        <text>{{item.label}}</text>
+        <text class="{{item.highlight ? 'green' : ''}}">{{item.value}}</text>
+      </view>
+      <view class="divider"></view>
+      <view class="total-row">
+        <text>合计</text>
+        <text>¥{{total}}</text>
+      </view>
+    </view>
+
+    <view class="notice">
+      <text class="check">✓</text>
+      <text>交易完成后，货款将自动转入卖家账户。请确认完好收货后再点击确认收货，平台全程担保。</text>
+    </view>
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <view>
+      <view class="pay-label">实付金额</view>
+      <view class="pay-price">¥{{total}}</view>
+    </view>
+    <button bindtap="pay">确认支付</button>
+  </view>
+</view>

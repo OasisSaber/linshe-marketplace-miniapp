@@ -1,0 +1,25 @@
+<view class="page">
+  <view class="tabs">
+    <view wx:for="{{tabs}}" wx:key="*this" class="{{activeTab === item ? 'active' : ''}}" data-tab="{{item}}" bindtap="setTab">{{item}}</view>
+  </view>
+
+  <scroll-view class="list" scroll-y>
+    <view wx:for="{{items}}" wx:key="id" class="fav-card" data-id="{{item.item_id}}" bindtap="openDetail">
+      <view class="thumb">{{item.emoji}}</view>
+      <view class="main">
+        <view class="title">{{item.title}}</view>
+        <view class="meta">
+          <text wx:if="{{item.tag}}" class="drop">{{item.tag}}</text>
+          <text>{{item.location}}</text>
+        </view>
+        <view class="bottom">
+          <view>
+            <text class="price">¥{{item.price}}</text>
+            <text wx:if="{{item.originalPrice}}" class="original">¥{{item.originalPrice}}</text>
+          </view>
+          <button catchtap="removeFavorite">♥ 取消收藏</button>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,18 @@
+page {
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-text: #121318;
+  --color-muted: #6b6e85;
+  --color-border: #e2e4ec;
+  --color-brand: #22c55e;
+  --color-brand-dark: #16a34a;
+  --color-brand-soft: #dcfce7;
+  --color-warm: #f59e0b;
+  --color-warn: #92400e;
+  --radius-sm: 12rpx;
+  --radius-card: 24rpx;
+  --space-sm: 16rpx;
+  --space-md: 24rpx;
+  --space-lg: 32rpx;
+  --shadow-card: 0 4rpx 16rpx rgba(18, 19, 24, 0.04);
+}

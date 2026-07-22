@@ -1,0 +1,33 @@
+<view class="page">
+  <view class="header">
+    <view class="title-row">
+      <text class="title">消息</text>
+      <button class="compose" bindtap="createChat">新会话</button>
+    </view>
+    <view class="search">
+      <text>⌕</text>
+      <input value="{{keyword}}" bindinput="onSearchInput" placeholder="搜索同学、商品或消息" />
+    </view>
+  </view>
+
+  <scroll-view class="chat-list" scroll-y>
+    <view wx:for="{{chats}}" wx:key="id" class="chat-row" data-id="{{item.id}}" bindtap="openChat">
+      <view class="avatar avatar-{{item.color}}">
+        <text>{{item.avatar}}</text>
+        <text wx:if="{{item.unread}}" class="badge">{{item.unread}}</text>
+      </view>
+      <view class="chat-main">
+        <view class="chat-top">
+          <text class="name">{{item.name}}</text>
+          <text class="time">{{item.time}}</text>
+        </view>
+        <view class="last">{{item.last}}</view>
+      </view>
+      <view class="goods goods-{{item.goodsBg}}">{{item.goods}}</view>
+    </view>
+    <view wx:if="{{!chats.length}}" class="empty-state">
+      <view>⌕</view>
+      <text>没有找到相关会话</text>
+    </view>
+  </scroll-view>
+</view>

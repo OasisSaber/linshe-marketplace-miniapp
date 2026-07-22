@@ -1,0 +1,147 @@
+@import "../../styles/tokens.wxss";
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.success-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48rpx;
+}
+
+.success-mark {
+  position: relative;
+  width: 170rpx;
+  height: 170rpx;
+  margin-bottom: 48rpx;
+}
+
+.halo {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.halo.one {
+  inset: 0;
+  background: #f0fdf4;
+}
+
+.halo.two {
+  inset: 16rpx;
+  background: var(--color-brand-soft);
+}
+
+.check {
+  position: absolute;
+  inset: 32rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-dark));
+  color: #ffffff;
+  text-align: center;
+  line-height: 106rpx;
+  font-size: 58rpx;
+  font-weight: 900;
+  box-shadow: 0 20rpx 28rpx rgba(34, 197, 94, 0.42);
+}
+
+.title {
+  font-size: 44rpx;
+  font-weight: 900;
+}
+
+.desc {
+  width: 460rpx;
+  margin-top: 18rpx;
+  color: var(--color-muted);
+  text-align: center;
+  font-size: 24rpx;
+  line-height: 38rpx;
+}
+
+.item-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  margin-top: 44rpx;
+  padding: 24rpx;
+  border: 1rpx solid var(--color-border);
+  border-radius: 24rpx;
+  background: var(--color-surface);
+}
+
+.thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 20rpx;
+  background: #f0fdf4;
+  text-align: center;
+  line-height: 1;
+  font-size: 48rpx;
+}
+
+.item-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+  font-weight: 800;
+}
+
+.price {
+  margin-top: 8rpx;
+  color: var(--color-brand);
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.status {
+  padding: 8rpx 16rpx;
+  border-radius: 999rpx;
+  background: var(--color-brand-soft);
+  color: #15803d;
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.actions {
+  padding: 0 44rpx 52rpx;
+}
+
+.actions button {
+  height: 92rpx;
+  margin: 0 0 22rpx;
+  border-radius: 24rpx;
+  font-size: 30rpx;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.primary {
+  border: 0;
+  background: var(--color-brand);
+  color: #ffffff;
+  box-shadow: 0 8rpx 18rpx rgba(34, 197, 94, 0.35);
+}
+
+.secondary {
+  border: 1rpx solid var(--color-border);
+  background: #ffffff;
+  color: var(--color-text);
+}

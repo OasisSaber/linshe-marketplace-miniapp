@@ -1,0 +1,41 @@
+<view class="page">
+  <view class="search-header">
+    <view class="search-box">
+      <text class="search-text">{{query}}</text>
+      <text class="clear">×</text>
+    </view>
+  </view>
+
+  <scroll-view class="filter-scroll" scroll-x>
+    <view class="filter-row">
+      <button
+        wx:for="{{filters}}"
+        wx:key="*this"
+        class="filter-chip {{activeSort === item ? 'active' : ''}}"
+        data-value="{{item}}"
+        bindtap="selectSort"
+      >{{item}}</button>
+    </view>
+  </scroll-view>
+
+  <view class="result-count">找到 <text>42</text> 件相关闲置</view>
+
+  <scroll-view class="result-scroll" scroll-y>
+    <view class="result-grid">
+      <view wx:for="{{results}}" wx:key="id" class="result-card" data-id="{{item.item_id}}" bindtap="openDetail">
+        <view class="cover cover-{{item.bg}}">
+          <text>{{item.emoji}}</text>
+        </view>
+        <view class="card-body">
+          <view class="price">¥{{item.price}}</view>
+          <view class="title">{{item.title}}</view>
+          <text class="condition">{{item.condition}}</text>
+          <view class="meta">
+            <text class="seller">{{item.seller}}</text>
+            <text class="distance">📍{{item.distance}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

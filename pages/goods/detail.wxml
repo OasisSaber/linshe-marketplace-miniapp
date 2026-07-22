@@ -1,0 +1,49 @@
+<view class="page" wx:if="{{item}}">
+  <view class="gallery card">
+    <text>{{item.images[0]}}</text>
+    <view class="gallery-actions">
+      <text bindtap="shareItem">↗</text>
+      <text bindtap="toggleFavorite">{{favorited ? '♥' : '♡'}}</text>
+    </view>
+  </view>
+  <view class="info card">
+    <view class="price-row">
+      <text class="price">¥{{item.price}}</text>
+      <text class="original">原价¥{{item.original_price}}</text>
+      <text class="condition">{{item.condition}}</text>
+    </view>
+    <text class="title">{{item.title}}</text>
+  </view>
+  <view class="seller card">
+    <view class="seller-avatar">{{detail.sellerAvatar}}</view>
+    <view class="seller-copy">
+      <view class="seller-line">
+        <text class="seller-name">{{detail.sellerName}}</text>
+        <text class="verify-tag">学生认证</text>
+      </view>
+      <text class="seller-meta">{{detail.sellerMeta}}</text>
+    </view>
+    <view class="chat-pill" bindtap="chatSeller">聊一聊</view>
+  </view>
+  <view class="desc-card card">
+    <text class="card-title">商品描述</text>
+    <text class="safe">{{detail.description}}</text>
+  </view>
+  <view class="location-card card">
+    <view class="location-icon">⌖</view>
+    <view class="location-copy">
+      <text class="card-title">{{detail.meetupLabel}}</text>
+      <text class="location">步行约3分钟 · 安全公共区域</text>
+    </view>
+    <text class="safe-tag">安全区 ✓</text>
+  </view>
+  <view class="bottom-bar">
+    <text class="bottom-price">¥{{item.price}}</text>
+    <button class="chat-button" bindtap="chatSeller">聊一聊</button>
+    <button class="buy-button" bindtap="makeOffer">立即购买</button>
+  </view>
+  <view class="hidden-link">
+    <text class="location">面交地点：{{item.campus_location}}</text>
+    <view class="seller-link" bindtap="openSeller">查看卖家主页 ›</view>
+  </view>
+</view>

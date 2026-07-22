@@ -1,0 +1,34 @@
+<view class="page">
+  <view class="cover"></view>
+
+  <view class="seller-card">
+    <view class="avatar">{{seller.avatar}}</view>
+    <view class="name-row">
+      <text class="name">{{seller.name}}</text>
+      <text class="badge">🏅 {{seller.badge}}</text>
+    </view>
+    <view class="campus">{{seller.campus}}</view>
+    <view class="stats">
+      <view wx:for="{{stats}}" wx:key="label" class="stat">
+        <view>{{item.value}}<text wx:if="{{item.star}}"> ★</text></view>
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view class="content" scroll-y>
+    <view class="section-title">Ta的闲置 · 12 件</view>
+    <view class="goods-grid">
+      <view wx:for="{{goods}}" wx:key="id" class="goods-card">
+        <view class="goods-cover">{{item.emoji}}</view>
+        <view class="goods-title">{{item.title}}</view>
+        <view class="goods-price">¥{{item.price}}</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <button class="ghost" bindtap="message">▱ 私信</button>
+    <button class="primary" bindtap="follow">+ 关注店铺</button>
+  </view>
+</view>

@@ -1,0 +1,48 @@
+<view class="page index-page">
+  <view class="search-row">
+    <view class="campus">{{campus}}⌄</view>
+    <view class="search card">
+      <text class="search-icon">⌕</text>
+      <input value="{{keyword}}" bindinput="onSearchInput" placeholder="搜索校园好物…" />
+    </view>
+    <view class="filter-button" bindtap="openFilter">⌁</view>
+  </view>
+
+  <scroll-view class="category-scroll" scroll-x>
+    <block wx:for="{{categories}}" wx:key="name">
+      <view class="category-item {{activeCategory === item.name ? 'active' : ''}}" data-name="{{item.name}}" bindtap="selectCategory">
+        <view class="category-icon">{{item.icon}}</view>
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </scroll-view>
+
+  <view class="hero" bindtap="openPromotion">
+    <text class="hero-title">🎓 开学特惠季</text>
+    <text class="hero-copy">精选校园二手好物 · 最低至2折</text>
+    <view class="hero-action" catchtap="openPromotion">立即抢购 →</view>
+    <text class="hero-cart">🛒</text>
+  </view>
+
+  <view class="feed-header">
+    <text class="section-title">附近好物</text>
+    <text class="feed-count">500米内 · 共{{feedCount}}件</text>
+  </view>
+
+  <view class="feed">
+    <block wx:for="{{items}}" wx:key="item_id">
+      <view class="item-card card" data-id="{{item.item_id}}" bindtap="openDetail">
+        <view class="item-cover">
+          <text>{{item.images[0]}}</text>
+          <view class="favorite {{item.isFavorite ? 'active' : ''}}" data-id="{{item.item_id}}" catchtap="toggleFavorite">{{item.isFavorite ? '♥' : '♡'}}</view>
+        </view>
+        <view class="item-body">
+          <text class="price">¥{{item.price}}</text>
+          <text class="item-title">{{item.title}}</text>
+          <text class="condition">{{item.condition}}</text>
+          <text class="item-location">📍{{item.campus_location}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

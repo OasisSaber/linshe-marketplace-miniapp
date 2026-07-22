@@ -1,0 +1,46 @@
+{
+  "setting": {
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "uglifyFileName": false,
+    "enhance": true,
+    "packNpmRelationList": [],
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useCompilerPlugins": false,
+    "minifyWXML": true
+  },
+  "compileType": "miniprogram",
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "wechat-miniprogram-ai-guide"
+      },
+      {
+        "type": "folder",
+        "value": ".uploads"
+      },
+      {
+        "type": "file",
+        "value": "test2.fig"
+      },
+      {
+        "type": "file",
+        "value": "test2.1.make"
+      },
+      {
+        "type": "folder",
+        "value": "\u914d\u5957\u5f00\u53d1\u6587\u6863"
+      }
+    ],
+    "include": []
+  },
+  "appid": "touristappid",
+  "editorSetting": {}
+}

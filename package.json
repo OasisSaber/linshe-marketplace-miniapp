@@ -1,0 +1,8 @@
+{
+  "name": "linshe-wechat-miniprogram",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "check": "node scripts/check-project.js"
+  }
+}

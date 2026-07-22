@@ -1,0 +1,31 @@
+<view class="page">
+  <scroll-view class="content" scroll-y>
+    <view class="balance-card">
+      <view class="balance-label">账户余额（元）</view>
+      <view class="balance">{{balance}}</view>
+      <view class="wallet-actions">
+        <view class="wallet-action" bindtap="withdraw">提现</view>
+        <view class="wallet-action recharge" bindtap="recharge">＋ 充值</view>
+      </view>
+    </view>
+
+    <view class="stat-card">
+      <view wx:for="{{stats}}" wx:key="label" class="stat">
+        <view>{{item.value}}</view>
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="section-title">账单明细</view>
+    <view class="bill-card">
+      <view wx:for="{{bills}}" wx:key="id" class="bill-row">
+        <text class="bill-icon {{item.type}}">{{item.type === 'in' ? '↙' : '↗'}}</text>
+        <view class="bill-main">
+          <view>{{item.title}}</view>
+          <text>{{item.time}}</text>
+        </view>
+        <text class="amount {{item.type}}">{{item.amount}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
