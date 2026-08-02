@@ -1,7 +1,7 @@
 <view class="page">
   <view wx:if="{{step === 'login'}}" class="login-stage">
     <view class="brand-wrap">
-      <view class="brand-icon">⌂</view>
+      <image class="brand-icon" src="/images/brand/logo.png" mode="aspectFit"></image>
       <view class="brand-name">邻舍</view>
       <view class="tagline">让闲置在校园里流动起来 🌿</view>
       <view class="intro">与身边同学安心交易，每一次循环都是对地球的一份温柔</view>

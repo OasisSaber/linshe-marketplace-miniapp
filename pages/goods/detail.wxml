@@ -1,6 +1,7 @@
 <view class="page" wx:if="{{item}}">
   <view class="gallery card">
-    <text>{{item.images[0]}}</text>
+    <text wx:if="{{!item.images[0].src}}" class="gallery-emoji">{{item.images[0].emoji}}</text>
+    <image wx:else class="gallery-img" src="{{item.images[0].src}}" mode="aspectFill"></image>
     <view class="gallery-actions">
       <text bindtap="shareItem">↗</text>
       <text bindtap="toggleFavorite">{{favorited ? '♥' : '♡'}}</text>

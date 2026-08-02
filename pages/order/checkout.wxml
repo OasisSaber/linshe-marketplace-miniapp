@@ -15,7 +15,10 @@
     <view class="card">
       <view class="section-title">商品信息</view>
       <view class="goods-row">
-        <view class="thumb">{{item.images[0]}}</view>
+        <view class="thumb">
+          <text wx:if="{{!item.images[0].src}}">{{item.images[0].emoji}}</text>
+          <image wx:else class="thumb-img" src="{{item.images[0].src}}" mode="aspectFill"></image>
+        </view>
         <view class="goods-main">
           <view class="goods-title">{{item.title}}</view>
           <text class="condition">{{item.condition}}</text>
