@@ -27,10 +27,15 @@ Page({
     activeCategory: "全部",
     favoriteMap: {},
     feedCount: 0,
+    loading: false,
     items: []
   },
   onLoad() {
-    this.refreshItems();
+    this.setData({ loading: true });
+    // 模拟异步加载，展示骨架屏加载态（作品集体验）
+    setTimeout(() => {
+      this.refreshItems({ loading: false });
+    }, 400);
   },
   refreshItems(patch) {
     const nextData = Object.assign({}, this.data, patch || {});
@@ -67,5 +72,8 @@ Page({
     wx.navigateTo({
       url: `/pages/goods/detail?item_id=${event.currentTarget.dataset.id}`
     });
+  },
+  resetSearch() {
+    this.refreshItems({ keyword: "", activeCategory: "全部" });
   }
 });

@@ -2,6 +2,7 @@ Page({
   data: {
     item: {
       emoji: "📚",
+      src: "/images/goods/book.jpg",
       title: "高数考研全套复习资料",
       price: 35,
       status: "已上架"

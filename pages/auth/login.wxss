@@ -26,17 +26,9 @@
 }
 
 .brand-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 152rpx;
   height: 152rpx;
   border-radius: 44rpx;
-  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-dark));
-  color: #ffffff;
-  font-size: 72rpx;
-  font-weight: 900;
-  line-height: 1;
   box-shadow: 0 24rpx 32rpx rgba(34, 197, 94, 0.4);
 }
 

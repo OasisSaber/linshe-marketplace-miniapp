@@ -1,7 +1,8 @@
 <view class="page" wx:if="{{item}}">
   <view class="hero">
     <button class="floating-btn right" bindtap="toggleFavorite">{{favorited ? '♥' : '♡'}}</button>
-    <text class="hero-emoji">{{item.images[0]}}</text>
+    <text wx:if="{{!item.images[0].src}}" class="hero-emoji">{{item.images[0].emoji}}</text>
+    <image wx:else class="hero-img" src="{{item.images[0].src}}" mode="aspectFill"></image>
   </view>
 
   <view class="item-summary">

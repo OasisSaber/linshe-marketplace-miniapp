@@ -100,10 +100,20 @@
 }
 
 .cover {
+  position: relative;
   height: 320rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.cover-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .cover text {

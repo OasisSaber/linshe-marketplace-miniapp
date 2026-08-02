@@ -12,10 +12,10 @@ Page({
       { value: "64", label: "在售/已售" }
     ],
     goods: [
-      { id: "s_001", emoji: "📐", title: "考研数学辅导书 全新", price: 45 },
-      { id: "s_002", emoji: "🧴", title: "宿舍小型加湿器", price: 39 },
-      { id: "s_003", emoji: "👟", title: "Nike 跑鞋 42码 九成新", price: 260 },
-      { id: "s_004", emoji: "🪑", title: "人体工学学习椅", price: 180 }
+      { id: "s_001", emoji: "📐", src: "/images/goods/book.jpg", title: "考研数学辅导书 全新", price: 45 },
+      { id: "s_002", emoji: "🧴", src: "", title: "宿舍小型加湿器", price: 39 },
+      { id: "s_003", emoji: "👟", src: "", title: "Nike 跑鞋 42码 九成新", price: 260 },
+      { id: "s_004", emoji: "🪑", src: "/images/goods/desk.jpg", title: "人体工学学习椅", price: 180 }
     ]
   },
   goBack() {

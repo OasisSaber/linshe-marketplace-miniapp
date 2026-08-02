@@ -20,7 +20,10 @@
     <view class="section-title">Ta的闲置 · 12 件</view>
     <view class="goods-grid">
       <view wx:for="{{goods}}" wx:key="id" class="goods-card">
-        <view class="goods-cover">{{item.emoji}}</view>
+        <view class="goods-cover">
+          <text wx:if="{{!item.src}}">{{item.emoji}}</text>
+          <image wx:else class="goods-cover-img" src="{{item.src}}" mode="aspectFill"></image>
+        </view>
         <view class="goods-title">{{item.title}}</view>
         <view class="goods-price">¥{{item.price}}</view>
       </view>
