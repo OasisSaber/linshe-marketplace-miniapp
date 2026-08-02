@@ -76,7 +76,7 @@ linshe-marketplace-miniapp/
 ├─ app.json                  # 页面路由、窗口与 TabBar 配置
 ├─ app.wxss                  # 全局样式
 ├─ data/                     # 商品和订单等本地模拟数据
-├─ images/                   # TabBar 和页面图片资源
+├─ images/                   # TabBar、商品图、品牌徽标与空态插画资源
 ├─ pages/                    # 小程序页面
 │  ├─ auth/                  # 登录与学生认证
 │  ├─ community/             # 校园社区
@@ -170,7 +170,7 @@ Lin She mini program check passed.
 
 - 新发布商品、订单、聊天消息和认证状态只保存在运行时内存中。
 - 关闭或重新启动小程序后，运行时变更会重置。
-- 商品图片主要使用 Emoji 或本地静态资源表示。
+- 商品图片使用本地真实素材（来自 Wikimedia Commons 自由许可图片，完整来源与署名记录见 `images/goods/SOURCES.md`）；新发布商品封面暂以 Emoji 占位。
 - 搜索筛选、上传、定位、支付、核销和钱包包含不同程度的演示实现。
 - 无效实体 ID 的错误处理尚待 #1 完成。
 

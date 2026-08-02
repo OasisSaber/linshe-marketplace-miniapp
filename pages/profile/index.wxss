@@ -108,6 +108,17 @@
   color: #ffffff;
 }
 
+.member-logo {
+  width: 76rpx;
+  height: 76rpx;
+  margin-right: 22rpx;
+  border-radius: 18rpx;
+}
+
+.member-main {
+  flex: 1;
+}
+
 .member-title {
   font-size: 28rpx;
   font-weight: 900;

@@ -18,6 +18,7 @@
   </scroll-view>
 
   <view class="hero" bindtap="openPromotion">
+    <image class="hero-logo" src="/images/brand/logo.png" mode="aspectFit"></image>
     <text class="hero-title">🎓 开学特惠季</text>
     <text class="hero-copy">精选校园二手好物 · 最低至2折</text>
     <view class="hero-action" catchtap="openPromotion">立即抢购 →</view>
@@ -29,11 +30,23 @@
     <text class="feed-count">500米内 · 共{{feedCount}}件</text>
   </view>
 
-  <view class="feed">
+  <view wx:if="{{loading}}" class="feed">
+    <view wx:for="{{[1,2,3,4]}}" wx:key="*this" class="item-card card">
+      <view class="skeleton-cover"></view>
+      <view class="item-body">
+        <view class="skeleton-line w40"></view>
+        <view class="skeleton-line w90"></view>
+        <view class="skeleton-line w60"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="feed" wx:elif="{{items.length}}">
     <block wx:for="{{items}}" wx:key="item_id">
       <view class="item-card card" data-id="{{item.item_id}}" bindtap="openDetail">
         <view class="item-cover">
-          <text>{{item.images[0]}}</text>
+          <text wx:if="{{!item.images[0].src}}">{{item.images[0].emoji}}</text>
+          <image wx:else class="item-cover-img" src="{{item.images[0].src}}" mode="aspectFill"></image>
           <view class="favorite {{item.isFavorite ? 'active' : ''}}" data-id="{{item.item_id}}" catchtap="toggleFavorite">{{item.isFavorite ? '♥' : '♡'}}</view>
         </view>
         <view class="item-body">
@@ -44,5 +57,12 @@
         </view>
       </view>
     </block>
+  </view>
+
+  <view wx:else class="empty">
+    <image class="empty-img" src="/images/empty/empty-search.png" mode="aspectFit"></image>
+    <text class="empty-title">没有找到相关闲置</text>
+    <text class="empty-desc">换个关键词或分类再试试</text>
+    <button class="empty-btn" bindtap="resetSearch">清除搜索</button>
   </view>
 </view>

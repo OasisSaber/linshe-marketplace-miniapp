@@ -19,8 +19,9 @@
     </view>
 
     <view class="member-card" bindtap="openWallet">
-      <view>
-        <view class="member-title">🌿 绿色会员</view>
+      <image class="member-logo" src="/images/brand/logo.png" mode="aspectFit"></image>
+      <view class="member-main">
+        <view class="member-title">绿色会员</view>
         <view class="member-sub">环保交易积分</view>
       </view>
       <view class="points">积分×<text>320</text></view>
