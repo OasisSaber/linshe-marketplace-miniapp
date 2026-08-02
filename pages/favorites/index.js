@@ -21,5 +21,8 @@ Page({
   },
   removeFavorite() {
     wx.showToast({ title: "已取消收藏", icon: "none" });
+  },
+  goShopping() {
+    wx.switchTab({ url: "/pages/index/index" });
   }
 });

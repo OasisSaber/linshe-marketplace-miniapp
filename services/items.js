@@ -21,7 +21,7 @@ function createDemoItem(payload, sellerId) {
     title,
     price,
     original_price: Number(payload.original_price || price),
-    images: payload.images || ["📚"],
+    images: payload.images && payload.images.length ? payload.images : [{ src: "", emoji: "📚" }],
     category: payload.category || "教材课本",
     condition,
     campus_location: payload.campus_location || "图书馆南门 100米",
@@ -36,7 +36,8 @@ function getFavoriteItems() {
   return listItems().slice(0, 3).map((item, index) => ({
     id: `fav_${item.item_id}`,
     item_id: item.item_id,
-    emoji: item.images[0],
+    src: (item.images[0] && item.images[0].src) || "",
+    emoji: (item.images[0] && item.images[0].emoji) || "📦",
     title: item.title,
     price: item.price,
     originalPrice: item.original_price,
