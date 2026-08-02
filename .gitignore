@@ -54,3 +54,6 @@ desktop.ini
 *.db
 *.sqlite
 *.sqlite3
+
+# Reasonix 会话元数据
+.reasonix/
