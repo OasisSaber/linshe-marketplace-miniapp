@@ -21,10 +21,11 @@
   <view class="result-count">找到 <text>42</text> 件相关闲置</view>
 
   <scroll-view class="result-scroll" scroll-y>
-    <view class="result-grid">
+    <view class="result-grid" wx:if="{{results.length}}">
       <view wx:for="{{results}}" wx:key="id" class="result-card" data-id="{{item.item_id}}" bindtap="openDetail">
         <view class="cover cover-{{item.bg}}">
-          <text>{{item.emoji}}</text>
+          <text wx:if="{{!item.src}}">{{item.emoji}}</text>
+          <image wx:else class="cover-img" src="{{item.src}}" mode="aspectFill"></image>
         </view>
         <view class="card-body">
           <view class="price">¥{{item.price}}</view>
@@ -36,6 +37,12 @@
           </view>
         </view>
       </view>
+    </view>
+
+    <view wx:if="{{!results.length}}" class="empty">
+      <image class="empty-img" src="/images/empty/empty-search.png" mode="aspectFit"></image>
+      <text class="empty-title">没有找到相关闲置</text>
+      <text class="empty-desc">试试调整关键词或筛选条件</text>
     </view>
   </scroll-view>
 </view>
