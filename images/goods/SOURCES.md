@@ -1,0 +1,26 @@
+# 商品图片来源记录（SOURCES）
+
+> 素材来源：Wikimedia Commons（自由许可）。获取日期：2026-08-02。
+> 许可说明：CC0 / Public domain 可直接使用；CC BY / CC BY-SA 需按本表署名。
+
+| 商品 slug | 文件 | 图片标题 | 作者 | 许可证 | 原图链接 |
+| --- | --- | --- | --- | --- | --- |
+| book | book.jpg | Photo of the textbook in Russian "Design of mathematical algorithms for the functioning of radio-electronic equipment when solving problems of detection, identification and recognition." The authors of the textbook are V.N. Melnikov and I.F. Olenovich. Published by the Military Academy of Air Defense of the Ground Forces, Kyiv, 1992. 104 p. The book is available in the National Library of Ukraine named after Yaroslav the Wise. | Melnikov v n | CC0 | https://commons.wikimedia.org/wiki/File:000Design_of_mathematical_algorithms_for_the_functioning_of_radio-electronic_equipment.jpg |
+| macbook | macbook.jpg | 0280-1 | Aleksi Tappura a | CC0 | https://commons.wikimedia.org/wiki/File:Laptop_on_a_desk_(Unsplash).jpg |
+| dyson | dyson.jpg | Dyson DC 59 Motorhead Vacuum, cordless electronic | Tony Webster from Minneapolis, Minnesota, United States | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Dyson_Cordless_Vacuum_(43141478761).jpg |
+| fridge | fridge.jpg | Domestic refrigerator | Satirdan kahraman | CC0 | https://commons.wikimedia.org/wiki/File:Mini_buzdolab%C4%B1_(fridge)_.jpg |
+| notes | notes.png | Copertina di Algebra 1, VI edizione | Kkarbon | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Algebra_1.png |
+| cet | cet.jpg | Textbook in Myanmar | fyunkie | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Burmese_language_textbook,_Myanmar.jpg |
+| ipad | ipad.jpg | 12.9 " iPad Pro im Weltraum grau | Pengjiajie | CC BY-SA 3.0 de | https://commons.wikimedia.org/wiki/File:IPad_Pro.jpg |
+| keyboard | keyboard.jpg | ​羅技電子無線鍵盤K520r臺灣版。 | MiNe | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:TWN_Logitech_wireless_keyboard_K520r_20150621.jpg |
+| desk | desk.jpg | Writing Desk | xlibber | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Writing_Desk_(8257336503).jpg |
+| basketball | basketball.jpg | Only $4.61 (plus tax) at Wal-Mart. The same ball costs $8.00 at Target. | puuikibeach | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Baden_%22Game_Time%22_Basketball_(4227060563).jpg |
+| yoga | yoga.jpg | Woman on a yoga mat next to a window doing lower back exercises. | Nenad Stojkovic | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Woman_on_a_yoga_mat_next_to_a_window_doing_lower_back_exercises_-_50401795697.jpg |
+| badminton | badminton.jpg | File:Heads of badminton raquets.jpg | — | Public domain | https://commons.wikimedia.org/wiki/File:Heads_of_badminton_raquets.jpg |
+| backpack | backpack.jpg | Back Packs from BGMC for school children of Guatemala | amslerPIX | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Backpacks_for_Guatemala_BGMC_01.jpg |
+| jacket | jacket.jpg | A jean jacket photographed for Wikipedia. | NikosLikomitros | CC0 | https://commons.wikimedia.org/wiki/File:Jean_jacket.jpg |
+| boots | boots.jpg | Black Timberland boots on a man leaning leisurely against the railing on the observation deck at Nørre Vorupør beach, Denmark. | W.carter | CC0 | https://commons.wikimedia.org/wiki/File:Boots_of_a_man.jpg |
+| shirt | shirt.jpg | SZ Shenzhen man in white shirt long sleeve in May 2024 human hands | TANNMY NAISZE Wanguo | CC0 | https://commons.wikimedia.org/wiki/File:SZ_Shenzhen_man_in_white_shirt_long_sleeve_May_2024_R12S_human_hands_back.jpg |
+| guitar | guitar.jpg | Man playing an acoustic brazilian guitar (Violão) on Marco Zero Square, Refice, Pernambuco, Brazil. Play music of this image | Wilfredor | CC0 | https://commons.wikimedia.org/wiki/File:Man_playing_an_acoustic_brazilian_guitar_(Viol%C3%A3o)_on_Marco_Zero_Square,_Refice,_Pernambuco,_Brazil.jpg |
+| speaker | speaker.jpg | UE Boom speakers | Sinchen.Lin | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:UE_Boom_speakers.jpg |
+| midi | midi.jpg | Steinberg CC121 Cubase control surface and M-Audio Oxygen MIDI keyboard controller | martinezdj | CC0 | https://commons.wikimedia.org/wiki/File:Steinberg_CC121_Cubase_control_surface_and_M-Audio_Oxygen_MIDI_keyboard_controller_(2013-03-02_by_martinezdj).jpg |
