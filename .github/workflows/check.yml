@@ -18,6 +18,6 @@ jobs:
     name: check
     permissions:
       contents: read
-    uses: OasisSaber/TheMasterplan/.github/workflows/aw-check.yaml@v1
+    uses: OasisSaber/TheMasterplan/.github/workflows/aw-check.yml@v1
     with:
       project-check-path: scripts/check.sh
