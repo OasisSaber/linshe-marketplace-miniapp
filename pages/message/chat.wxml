@@ -1,53 +1,47 @@
-<view class="page">
-  <view class="header">
-    <view class="top-row">
-      <button class="icon-btn" bindtap="goBack">‹</button>
-      <view class="peer-main">
-        <view class="peer-line">
-          <view class="peer-avatar">{{peer.avatar}}</view>
-          <view class="peer-text">
-            <view class="peer-name">{{peer.name}}</view>
-            <view class="peer-status">{{peer.status}}</view>
-          </view>
-        </view>
+<view class="chat-page">
+  <view wx:if="{{state === 'ready'}}" class="chat-shell">
+    <view class="chat-header surface-card">
+      <view class="chat-avatar">{{peer.avatar}}</view>
+      <view class="chat-peer">
+        <text class="chat-peer__name">{{peer.name}}</text>
+        <text class="chat-peer__status">{{peer.status}}</text>
       </view>
-      <button class="icon-btn" bindtap="callPeer">☎</button>
-      <button class="icon-btn" bindtap="openMore">⋯</button>
     </view>
 
-    <view class="goods-strip">
-      <view class="goods-thumb">{{item.emoji}}</view>
-      <view class="goods-main">
-        <view class="goods-title">{{item.title}}</view>
-        <view class="goods-price">¥{{item.price}}</view>
+    <view class="chat-product surface-card">
+      <text class="chat-product__title">{{item.title}}</text>
+      <text class="chat-product__price money">¥{{item.price}}</text>
+      <view class="chat-product__actions">
+        <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="openOffer">出价</button>
+        <button class="button-base button-primary pressable" hover-class="pressable--active" bindtap="buyNow">直接购买</button>
       </view>
-      <view class="trade-actions">
-        <button class="outline" bindtap="openOffer">出价</button>
-        <button class="buy" bindtap="buyNow">购买</button>
+    </view>
+
+    <scroll-view class="message-list" scroll-y scroll-with-animation>
+      <view wx:for="{{messages}}" wx:key="id" class="message-row message-row--{{item.side}}">
+        <text class="message-bubble">{{item.text}}</text>
       </view>
+    </scroll-view>
+
+    <text wx:if="{{errorMessage}}" class="chat-error">{{errorMessage}}</text>
+
+    <view class="chat-composer">
+      <input
+        class="chat-composer__input"
+        value="{{draft}}"
+        bindinput="onInput"
+        confirm-type="send"
+        bindconfirm="sendMessage"
+        placeholder="输入消息"
+        aria-label="输入聊天消息"
+      />
+      <button class="chat-composer__send button-primary pressable" hover-class="pressable--active" bindtap="sendMessage">发送</button>
     </view>
   </view>
 
-  <scroll-view class="messages" scroll-y scroll-into-view="bottom-anchor">
-    <block wx:for="{{messages}}" wx:key="id">
-      <view wx:if="{{item.side === 'time'}}" class="time-pill">{{item.text}}</view>
-      <view wx:elif="{{item.side === 'peer'}}" class="msg-row peer">
-        <view class="small-avatar">{{peer.avatar}}</view>
-        <view class="bubble peer-bubble">{{item.text}}</view>
-      </view>
-      <view wx:else class="msg-row me">
-        <view class="bubble me-bubble">{{item.text}}</view>
-      </view>
-    </block>
-    <view id="bottom-anchor"></view>
-  </scroll-view>
-
-  <view class="composer">
-    <button class="plus" bindtap="openTools">＋</button>
-    <view class="input-box">
-      <input value="{{draft}}" bindinput="onInput" confirm-type="send" bindconfirm="sendMessage" placeholder="发送消息…" />
-      <text>⌑</text>
-    </view>
-    <button class="send" bindtap="sendMessage">➤</button>
+  <view wx:elif="{{state === 'not-found'}}" class="state-panel">
+    <text class="state-panel__title">会话不存在</text>
+    <text class="state-panel__description">无效会话不会再读取或修改默认会话。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 </view>

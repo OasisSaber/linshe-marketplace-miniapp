@@ -1,61 +1,59 @@
-<view class="page" wx:if="{{item}}">
-  <scroll-view class="content" scroll-y>
-    <view class="card location-card">
-      <view class="label">⌖ 校内面交地点</view>
-      <view class="location-row">
-        <view>
-          <view class="location-title">{{meetupLocation}}</view>
-          <view class="muted">平台认证安全交易地点 · 有监控</view>
-        </view>
-        <text class="chevron">›</text>
-      </view>
-      <button class="soft-btn" bindtap="chooseLocation">选择校内交易地点</button>
-    </view>
-
-    <view class="card">
-      <view class="section-title">商品信息</view>
-      <view class="goods-row">
-        <view class="thumb">
-          <text wx:if="{{!item.images[0].src}}">{{item.images[0].emoji}}</text>
-          <image wx:else class="thumb-img" src="{{item.images[0].src}}" mode="aspectFill"></image>
-        </view>
-        <view class="goods-main">
-          <view class="goods-title">{{item.title}}</view>
-          <text class="condition">{{item.condition}}</text>
-          <view class="goods-price">¥{{dealPrice}}</view>
-        </view>
-      </view>
-      <view class="seller-row">
-        <text class="avatar">王</text>
-        <text class="seller-name">王同学</text>
-        <text class="verified">学生认证</text>
+<view class="page checkout-page">
+  <view wx:if="{{state === 'ready'}}">
+    <view class="checkout-item surface-card">
+      <image wx:if="{{item.images[0].src}}" class="checkout-item__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
+      <view wx:else class="checkout-item__placeholder">{{item.images[0].emoji}}</view>
+      <view class="checkout-item__copy">
+        <text class="checkout-item__title">{{item.title}}</text>
+        <text class="checkout-item__meta">{{item.condition}} · {{item.campus_location}}</text>
       </view>
     </view>
 
-    <view class="card">
-      <view class="section-title">费用明细</view>
-      <view wx:for="{{feeRows}}" wx:key="label" class="fee-row">
-        <text>{{item.label}}</text>
-        <text class="{{item.highlight ? 'green' : ''}}">{{item.value}}</text>
+    <view class="checkout-section surface-card">
+      <text class="checkout-section__title">费用明细</text>
+      <view class="fee-row">
+        <text>商品成交价</text>
+        <text class="money">¥{{dealPrice}}</text>
       </view>
-      <view class="divider"></view>
-      <view class="total-row">
+      <view class="fee-row">
+        <text>平台担保费</text>
+        <text class="money">¥{{guaranteeFee}}</text>
+      </view>
+      <view class="fee-row fee-row--discount">
+        <text>校园面交优惠</text>
+        <text class="money">-¥{{discountAmount}}</text>
+      </view>
+      <view class="fee-row fee-row--total">
         <text>合计</text>
-        <text>¥{{total}}</text>
+        <text class="money">¥{{total}}</text>
       </view>
     </view>
 
-    <view class="notice">
-      <text class="check">✓</text>
-      <text>交易完成后，货款将自动转入卖家账户。请确认完好收货后再点击确认收货，平台全程担保。</text>
+    <view class="checkout-section surface-card">
+      <text class="checkout-section__title">面交地点</text>
+      <text class="checkout-location">{{meetupLocation}}</text>
+      <text class="checkout-helper">建议在公共区域完成验货和本地 Demo 核销。</text>
     </view>
-  </scroll-view>
 
-  <view class="bottom-bar">
-    <view>
-      <view class="pay-label">实付金额</view>
-      <view class="pay-price">¥{{total}}</view>
-    </view>
-    <button bindtap="pay">确认支付</button>
+    <text wx:if="{{errorMessage}}" class="checkout-error">{{errorMessage}}</text>
+
+    <button
+      class="button-base button-primary pressable checkout-submit"
+      hover-class="pressable--active"
+      disabled="{{submitting}}"
+      bindtap="pay"
+    >{{submitting ? '正在创建订单…' : '确认 Demo 支付'}}</button>
+  </view>
+
+  <view wx:elif="{{state === 'unavailable'}}" class="state-panel">
+    <text class="state-panel__title">商品当前不可结算</text>
+    <text class="state-panel__description">商品可能已被预订或售出，请返回查看其他商品。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
+  </view>
+
+  <view wx:elif="{{state === 'not-found'}}" class="state-panel">
+    <text class="state-panel__title">商品不存在</text>
+    <text class="state-panel__description">无法为无效商品创建订单。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 </view>

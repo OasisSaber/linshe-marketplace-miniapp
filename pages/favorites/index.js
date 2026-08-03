@@ -1,27 +1,34 @@
-const { getFavoriteItems } = require("../../services/items");
+const {
+  listFavoriteItems,
+  removeFavorite
+} = require("../../services/favorites");
 
 Page({
   data: {
-    activeTab: "商品",
-    tabs: ["商品", "帖子"],
     items: []
   },
-  onLoad() {
-    this.setData({ items: getFavoriteItems() });
+
+  onShow() {
+    this.refresh();
   },
-  goBack() {
-    wx.navigateBack();
+
+  refresh() {
+    this.setData({ items: listFavoriteItems() });
   },
-  setTab(event) {
-    this.setData({ activeTab: event.currentTarget.dataset.tab });
-  },
+
   openDetail(event) {
-    const itemId = event.currentTarget.dataset.id;
-    wx.navigateTo({ url: `/pages/goods/detail?item_id=${itemId}` });
+    wx.navigateTo({
+      url: `/pages/goods/detail?item_id=${event.currentTarget.dataset.id}`
+    });
   },
-  removeFavorite() {
+
+  removeFavorite(event) {
+    const itemId = event.currentTarget.dataset.id;
+    removeFavorite(itemId);
+    this.refresh();
     wx.showToast({ title: "已取消收藏", icon: "none" });
   },
+
   goShopping() {
     wx.switchTab({ url: "/pages/index/index" });
   }

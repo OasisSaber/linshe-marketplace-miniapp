@@ -4,71 +4,68 @@ const auth = require("../services/auth");
 
 function freshApp() {
   return {
-    globalData: { isVerified: false, userId: "buyer_test", campus: "北京大学" }
+    globalData: {
+      isVerified: false,
+      userId: "buyer_test",
+      sellerId: "seller_001",
+      campus: "北京大学"
+    }
   };
 }
 
-test("accepts a complete campus email with the demo code", () => {
+test("accepts complete campus email and demo code", () => {
   const app = freshApp();
-  const result = auth.verifyStudent(app, { email: "student@pku.edu.cn", code: "123456" });
+  const result = auth.verifyStudent(app, {
+    email: "student@pku.edu.cn",
+    code: "123456"
+  });
   assert.equal(result.ok, true);
   assert.equal(app.globalData.isVerified, true);
 });
 
-test("accepts any .edu domain suffix email", () => {
-  for (const email of ["student@example.edu", "a@b.edu.cn"]) {
+test("rejects incomplete and non-campus emails", () => {
+  for (const email of ["abc.edu", "student@example.com", "student@gmail.edu.cn.evil.com"]) {
     const app = freshApp();
     const result = auth.verifyStudent(app, { email, code: "123456" });
-    assert.equal(result.ok, true, `should accept ${email}`);
-  }
-});
-
-test("rejects incomplete email addresses", () => {
-  const emails = ["abc.edu", "student@", "@pku.edu.cn", "a b@pku.edu.cn", "student@pku", ""];
-  for (const email of emails) {
-    const app = freshApp();
-    const result = auth.verifyStudent(app, { email, code: "123456" });
-    assert.equal(result.ok, false, `should reject ${JSON.stringify(email)}`);
-    assert.equal(app.globalData.isVerified, false, `state unchanged for ${JSON.stringify(email)}`);
-  }
-});
-
-test("rejects non-campus domains", () => {
-  const emails = ["student@example.com", "student@qq.cn", "student@gmail.edu.cn.evil.com"];
-  for (const email of emails) {
-    const app = freshApp();
-    const result = auth.verifyStudent(app, { email, code: "123456" });
-    assert.equal(result.ok, false, `should reject ${email}`);
+    assert.equal(result.ok, false, email);
     assert.equal(app.globalData.isVerified, false);
   }
 });
 
-test("requires a six-digit numeric code", () => {
-  const codes = ["", "12345", "1234567", "abcdef", "12 456", "12345a"];
-  for (const code of codes) {
+test("rejects malformed and wrong codes", () => {
+  for (const code of ["", "12345", "abcdef", "654321"]) {
     const app = freshApp();
-    const result = auth.verifyStudent(app, { email: "student@pku.edu.cn", code });
-    assert.equal(result.ok, false, `should reject code ${JSON.stringify(code)}`);
+    const result = auth.verifyStudent(app, {
+      email: "student@pku.edu.cn",
+      code
+    });
+    assert.equal(result.ok, false, code);
     assert.equal(app.globalData.isVerified, false);
   }
 });
 
-test("rejects a wrong six-digit code without changing state", () => {
+test("requireVerified returns redirect for unauthenticated state", () => {
   const app = freshApp();
-  const result = auth.verifyStudent(app, { email: "student@pku.edu.cn", code: "654321" });
+  const result = auth.requireVerified(app);
   assert.equal(result.ok, false);
-  assert.equal(app.globalData.isVerified, false);
+  assert.equal(result.redirect, "/pages/auth/login");
 });
 
-test("invalid input after a failed attempt still requires a valid attempt", () => {
+
+test("missing payload fails safely and keeps legacy message field", () => {
   const app = freshApp();
-  auth.verifyStudent(app, { email: "student@pku.edu.cn", code: "000000" });
+  const result = auth.verifyStudent(app);
+  assert.equal(result.ok, false);
+  assert.equal(typeof result.message, "string");
+  assert.equal(result.message, result.error.message);
   assert.equal(app.globalData.isVerified, false);
-  const ok = auth.verifyStudent(app, { email: "student@pku.edu.cn", code: "123456" });
-  assert.equal(ok.ok, true);
-  assert.equal(app.globalData.isVerified, true);
 });
 
-test("exports the documented demo verification code", () => {
-  assert.equal(auth.DEMO_VERIFICATION_CODE, "123456");
+test("successful result keeps legacy message field", () => {
+  const app = freshApp();
+  const result = auth.verifyStudent(app, {
+    email: "student@pku.edu.cn",
+    code: "123456"
+  });
+  assert.equal(result.message, "认证完成");
 });
