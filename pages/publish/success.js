@@ -1,20 +1,27 @@
+const { getItemById } = require("../../services/items");
+
 Page({
   data: {
-    item: {
-      emoji: "📚",
-      src: "/images/goods/book.jpg",
-      title: "高数考研全套复习资料",
-      price: 35,
-      status: "已上架"
-    }
+    state: "loading",
+    item: null
   },
-  goBack() {
+
+  onLoad(options) {
+    const item = getItemById(options.item_id);
+    this.setData({
+      state: item ? "ready" : "not-found",
+      item
+    });
+  },
+
+  goHome() {
     wx.switchTab({ url: "/pages/index/index" });
   },
-  shareItem() {
-    wx.showToast({ title: "已生成分享卡片", icon: "success" });
-  },
-  viewMine() {
-    wx.switchTab({ url: "/pages/profile/index" });
+
+  openItem() {
+    if (!this.data.item) return;
+    wx.redirectTo({
+      url: `/pages/goods/detail?item_id=${this.data.item.item_id}`
+    });
   }
 });

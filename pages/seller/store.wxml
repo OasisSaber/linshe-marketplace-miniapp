@@ -1,37 +1,68 @@
-<view class="page">
-  <view class="cover"></view>
-
-  <view class="seller-card">
-    <view class="avatar">{{seller.avatar}}</view>
-    <view class="name-row">
-      <text class="name">{{seller.name}}</text>
-      <text class="badge">🏅 {{seller.badge}}</text>
+<view class="page seller-page">
+  <view wx:if="{{state === 'ready'}}">
+    <view class="seller-hero surface-card">
+      <view class="seller-avatar">{{seller.avatar_text}}</view>
+      <view class="seller-identity">
+        <text class="seller-name">{{seller.name}}</text>
+        <text class="seller-meta">{{seller.campus}} · {{seller.college}}</text>
+        <text class="seller-bio">{{seller.bio}}</text>
+      </view>
+      <button
+        class="follow-button button-base {{followed ? 'button-secondary' : 'button-primary'}} pressable"
+        hover-class="pressable--active"
+        bindtap="toggleFollow"
+      >{{followed ? '已关注' : '关注'}}</button>
     </view>
-    <view class="campus">{{seller.campus}}</view>
-    <view class="stats">
-      <view wx:for="{{stats}}" wx:key="label" class="stat">
-        <view>{{item.value}}<text wx:if="{{item.star}}"> ★</text></view>
-        <text>{{item.label}}</text>
+
+    <view class="seller-stats surface-card">
+      <view class="seller-stat">
+        <text class="seller-stat__value tabular-nums">{{seller.rating}}</text>
+        <text class="seller-stat__label">综合评分</text>
+      </view>
+      <view class="seller-stat">
+        <text class="seller-stat__value tabular-nums">{{seller.reputation_score}}</text>
+        <text class="seller-stat__label">信誉分</text>
+      </view>
+      <view class="seller-stat">
+        <text class="seller-stat__value tabular-nums">{{stats.completedTrades}}</text>
+        <text class="seller-stat__label">完成交易</text>
+      </view>
+    </view>
+
+    <view class="seller-section">
+      <view class="seller-section__header">
+        <text class="section-title">TA 的商品</text>
+        <text class="seller-section__count tabular-nums">{{items.length}} 件</text>
+      </view>
+
+      <view wx:if="{{items.length}}" class="seller-grid">
+        <view
+          wx:for="{{items}}"
+          wx:key="item_id"
+          class="seller-item surface-card pressable"
+          hover-class="pressable--active"
+          data-id="{{item.item_id}}"
+          bindtap="openItem"
+         role="button">
+          <image wx:if="{{item.images[0].src}}" class="seller-item__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
+          <view wx:else class="seller-item__placeholder">{{item.images[0].emoji}}</view>
+          <view class="seller-item__copy">
+            <text class="seller-item__title">{{item.title}}</text>
+            <text class="seller-item__price money">¥{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view wx:else class="state-panel">
+        <text class="state-panel__title">暂无在售商品</text>
+        <text class="state-panel__description">卖家的商品会在发布后显示在这里。</text>
       </view>
     </view>
   </view>
 
-  <scroll-view class="content" scroll-y>
-    <view class="section-title">Ta的闲置 · 12 件</view>
-    <view class="goods-grid">
-      <view wx:for="{{goods}}" wx:key="id" class="goods-card">
-        <view class="goods-cover">
-          <text wx:if="{{!item.src}}">{{item.emoji}}</text>
-          <image wx:else class="goods-cover-img" src="{{item.src}}" mode="aspectFill"></image>
-        </view>
-        <view class="goods-title">{{item.title}}</view>
-        <view class="goods-price">¥{{item.price}}</view>
-      </view>
-    </view>
-  </scroll-view>
-
-  <view class="bottom-bar">
-    <button class="ghost" bindtap="message">▱ 私信</button>
-    <button class="primary" bindtap="follow">+ 关注店铺</button>
+  <view wx:elif="{{state === 'not-found'}}" class="state-panel">
+    <text class="state-panel__title">卖家不存在</text>
+    <text class="state-panel__description">链接可能已失效，或卖家资料已移除。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 </view>

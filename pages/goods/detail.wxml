@@ -1,50 +1,63 @@
-<view class="page" wx:if="{{item}}">
-  <view class="gallery card">
-    <text wx:if="{{!item.images[0].src}}" class="gallery-emoji">{{item.images[0].emoji}}</text>
-    <image wx:else class="gallery-img" src="{{item.images[0].src}}" mode="aspectFill"></image>
-    <view class="gallery-actions">
-      <text bindtap="shareItem">↗</text>
-      <text bindtap="toggleFavorite">{{favorited ? '♥' : '♡'}}</text>
+<view class="page detail-page">
+  <view wx:if="{{state === 'ready'}}">
+    <view class="detail-gallery surface-card">
+      <image wx:if="{{item.images[0].src}}" class="detail-gallery__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
+      <view wx:else class="detail-gallery__placeholder">{{item.images[0].emoji}}</view>
     </view>
-  </view>
-  <view class="info card">
-    <view class="price-row">
-      <text class="price">¥{{item.price}}</text>
-      <text class="original">原价¥{{item.original_price}}</text>
-      <text class="condition">{{item.condition}}</text>
-    </view>
-    <text class="title">{{item.title}}</text>
-  </view>
-  <view class="seller card">
-    <view class="seller-avatar">{{detail.sellerAvatar}}</view>
-    <view class="seller-copy">
-      <view class="seller-line">
-        <text class="seller-name">{{detail.sellerName}}</text>
-        <text class="verify-tag">学生认证</text>
+
+    <view class="detail-summary surface-card">
+      <view class="detail-summary__top">
+        <text class="detail-price money">¥{{item.price}}</text>
+        <text class="status-chip">{{statusLabel}}</text>
       </view>
-      <text class="seller-meta">{{detail.sellerMeta}}</text>
+      <text class="detail-title">{{item.title}}</text>
+      <text class="detail-meta">{{item.condition}} · 原价 ¥{{item.original_price}}</text>
+      <text class="detail-description">{{item.description}}</text>
     </view>
-    <view class="chat-pill" bindtap="chatSeller">聊一聊</view>
-  </view>
-  <view class="desc-card card">
-    <text class="card-title">商品描述</text>
-    <text class="safe">{{detail.description}}</text>
-  </view>
-  <view class="location-card card">
-    <view class="location-icon">⌖</view>
-    <view class="location-copy">
-      <text class="card-title">{{detail.meetupLabel}}</text>
-      <text class="location">步行约3分钟 · 安全公共区域</text>
+
+    <view
+      class="seller-row surface-card pressable"
+      hover-class="pressable--active"
+      bindtap="openSeller"
+      aria-label="查看卖家资料"
+     role="button">
+      <view class="seller-row__avatar">{{seller ? seller.avatar_text : '卖'}}</view>
+      <view class="seller-row__copy">
+        <text class="seller-row__name">{{seller ? seller.name : '卖家资料'}}</text>
+        <text class="seller-row__meta">{{seller ? seller.campus + ' · 信誉分 ' + seller.reputation_score : '资料暂不可用'}}</text>
+      </view>
+      <text class="seller-row__action">查看</text>
     </view>
-    <text class="safe-tag">安全区 ✓</text>
+
+    <view class="meetup-card surface-card">
+      <text class="meetup-card__label">建议面交地点</text>
+      <text class="meetup-card__value">{{item.campus_location}}</text>
+      <text class="meetup-card__helper">请在公共区域当面检查商品，当前核销仅为本地 Demo。</text>
+    </view>
+
+    <view class="detail-actions">
+      <button
+        class="button-base button-secondary pressable"
+        hover-class="pressable--active"
+        bindtap="toggleFavorite"
+      >{{favorited ? '取消收藏' : '收藏商品'}}</button>
+      <button
+        class="button-base button-secondary pressable"
+        hover-class="pressable--active"
+        bindtap="chatSeller"
+      >联系卖家</button>
+      <button
+        class="button-base button-primary pressable"
+        hover-class="pressable--active"
+        bindtap="makeOffer"
+        disabled="{{item.status !== 'on_sale'}}"
+      >{{item.status === 'on_sale' ? '出价购买' : '商品交易中'}}</button>
+    </view>
   </view>
-  <view class="bottom-bar">
-    <text class="bottom-price">¥{{item.price}}</text>
-    <button class="chat-button" bindtap="chatSeller">聊一聊</button>
-    <button class="buy-button" bindtap="makeOffer">立即购买</button>
-  </view>
-  <view class="hidden-link">
-    <text class="location">面交地点：{{item.campus_location}}</text>
-    <view class="seller-link" bindtap="openSeller">查看卖家主页 ›</view>
+
+  <view wx:elif="{{state === 'not-found'}}" class="state-panel">
+    <text class="state-panel__title">商品不存在</text>
+    <text class="state-panel__description">无效商品链接不会再回退到列表第一条数据。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 </view>
