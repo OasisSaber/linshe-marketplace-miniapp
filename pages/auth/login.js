@@ -32,7 +32,7 @@ Page({
     this.setData({ code: event.detail.value });
   },
   sendCode() {
-    wx.showToast({ title: "验证码已发送", icon: "success" });
+    wx.showToast({ title: "演示验证码 123456（不会真实发送）", icon: "none" });
   },
   phoneLogin() {
     wx.showToast({ title: "Demo 使用校园邮箱认证登录", icon: "none" });
