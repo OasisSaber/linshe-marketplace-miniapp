@@ -4,5 +4,6 @@ set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
 
-npm run ci
-echo "linshe-marketplace-miniapp project validation passed."
+node scripts/validate-ui-contracts.js
+node --test
+echo "Lin She quality foundation validation passed."

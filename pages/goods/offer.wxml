@@ -1,30 +1,32 @@
-<view class="page" wx:if="{{item}}">
-  <view class="hero">
-    <button class="floating-btn right" bindtap="toggleFavorite">{{favorited ? '♥' : '♡'}}</button>
-    <text class="hero-emoji">{{item.images[0]}}</text>
+<view class="page offer-page">
+  <view wx:if="{{state === 'ready'}}" class="offer-card surface-card">
+    <text class="offer-label">向卖家出价</text>
+    <text class="offer-title">{{item.title}}</text>
+    <text class="offer-price-label">卖家标价</text>
+    <text class="offer-price money">¥{{item.price}}</text>
+
+    <view class="field">
+      <text class="field__label">你的出价</text>
+      <view class="field__control offer-control {{errorMessage ? 'field__control--error' : ''}}">
+        <text class="offer-control__prefix">¥</text>
+        <input
+          class="offer-control__input tabular-nums"
+          value="{{offerPrice}}"
+          type="digit"
+          bindinput="onPriceInput"
+          aria-label="输入出价"
+        />
+      </view>
+      <text wx:if="{{errorMessage}}" class="field__error">{{errorMessage}}</text>
+      <text wx:else class="field__helper">出价通过后仍需在结算页确认 Demo 订单。</text>
+    </view>
+
+    <button class="button-base button-primary pressable" hover-class="pressable--active" bindtap="submitOffer">继续结算</button>
   </view>
 
-  <view class="item-summary">
-    <view class="price">¥{{item.price}}</view>
-    <view class="title">{{item.title}}</view>
-    <view class="sub">{{item.condition}} · 配件齐全</view>
-  </view>
-
-  <view class="mask"></view>
-
-  <view class="sheet">
-    <view class="handle"></view>
-    <view class="sheet-title">发起出价</view>
-    <view class="sheet-sub">卖家标价 ¥{{sellerPrice}}</view>
-    <view class="amount-row">
-      <text class="currency">¥</text>
-      <input class="amount-input" type="number" value="{{offerPrice}}" bindinput="onPriceInput" />
-    </view>
-    <view class="amount-line"></view>
-    <view class="hint">建议出价在原价 7 折以上 · 卖家将在24h内回应</view>
-    <view class="sheet-actions">
-      <button class="ghost" bindtap="goBack">取消</button>
-      <button class="primary" bindtap="submitOffer">发送出价</button>
-    </view>
+  <view wx:elif="{{state === 'not-found'}}" class="state-panel">
+    <text class="state-panel__title">商品当前不可出价</text>
+    <text class="state-panel__description">商品可能不存在、已预订或已售出。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 </view>

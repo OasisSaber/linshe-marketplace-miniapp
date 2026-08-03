@@ -1,169 +1,42 @@
-@import "../../styles/tokens.wxss";
-
-.page {
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-  background: var(--color-bg);
-}
-
-.hero {
-  position: relative;
-  height: 440rpx;
-  background: linear-gradient(166deg, #0f2027 8%, #203a43 50%, #2c5364 92%);
+.offer-card {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
 }
 
-.hero-emoji {
-  opacity: 0.66;
-  font-size: 104rpx;
-}
-
-.floating-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 24rpx;
-  width: 66rpx;
-  height: 66rpx;
-  padding: 0;
-  border: 0;
-  border-radius: 22rpx;
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  line-height: 1;
-  font-size: 34rpx;
-}
-
-.floating-btn.right {
-  right: 24rpx;
-}
-
-.item-summary {
-  padding: 26rpx 28rpx;
-}
-
-.price {
-  color: var(--color-text);
-  font-size: 48rpx;
-  font-weight: 900;
-}
-
-.title {
-  margin-top: 8rpx;
-  font-size: 30rpx;
-  font-weight: 800;
-}
-
-.sub {
-  margin-top: 6rpx;
+.offer-label,
+.offer-price-label {
   color: var(--color-muted);
   font-size: 24rpx;
 }
 
-.mask {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.52);
+.offer-title {
+  font-size: 34rpx;
+  font-weight: 800;
+  line-height: 1.35;
 }
 
-.sheet {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 22rpx 36rpx 34rpx;
-  border-radius: 44rpx 44rpx 0 0;
-  background: #ffffff;
+.offer-price {
+  color: var(--color-brand-text);
+  font-size: 44rpx;
+  font-weight: 800;
 }
 
-.handle {
-  width: 72rpx;
-  height: 8rpx;
-  margin: 0 auto 24rpx;
-  border-radius: 999rpx;
-  background: var(--color-border);
+.offer-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.sheet-title {
-  text-align: center;
+.offer-control__prefix {
   font-size: 32rpx;
   font-weight: 800;
 }
 
-.sheet-sub {
-  margin-top: 10rpx;
-  color: var(--color-muted);
-  text-align: center;
-  font-size: 24rpx;
-}
-
-.amount-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16rpx;
-  margin-top: 28rpx;
-}
-
-.currency {
-  color: var(--color-muted);
-  font-size: 48rpx;
-  font-weight: 700;
-}
-
-.amount-input {
-  width: 220rpx;
-  height: 96rpx;
-  color: var(--color-text);
-  text-align: center;
-  font-size: 88rpx;
-  font-weight: 900;
-}
-
-.amount-line {
-  height: 6rpx;
-  margin: 0 66rpx;
-  border-radius: 999rpx;
-  background: var(--color-brand);
-}
-
-.hint {
-  margin-top: 18rpx;
-  color: var(--color-muted);
-  text-align: center;
-  font-size: 22rpx;
-}
-
-.sheet-actions {
-  display: flex;
-  gap: 20rpx;
-  margin-top: 36rpx;
-}
-
-.ghost,
-.primary {
-  height: 92rpx;
-  margin: 0;
-  border-radius: 24rpx;
-  font-size: 28rpx;
-  font-weight: 800;
-  line-height: 92rpx;
-}
-
-.ghost {
+.offer-control__input {
   flex: 1;
-  border: 1rpx solid var(--color-border);
-  background: #ffffff;
-  color: var(--color-muted);
-}
-
-.primary {
-  flex: 1.8;
-  background: var(--color-brand);
-  color: #ffffff;
-  box-shadow: 0 8rpx 18rpx rgba(34, 197, 94, 0.35);
+  min-height: var(--touch-min);
+  font-size: 36rpx;
+  font-weight: 800;
 }

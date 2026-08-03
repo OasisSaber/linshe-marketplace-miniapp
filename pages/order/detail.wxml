@@ -1,45 +1,72 @@
-<view class="page">
-  <view class="status-hero">
-    <view class="status-icon">📦</view>
-    <view>
-      <text class="status-title">{{verified ? '交易完成' : '等待校内面交'}}</text>
-      <text class="status-sub">今天下午3点 · {{order.meetup_location}}</text>
+<view class="page order-page">
+  <view wx:if="{{state === 'ready'}}">
+    <view class="order-status surface-card">
+      <text class="order-status__label">订单状态</text>
+      <text class="order-status__value">{{statusLabel}}</text>
+      <text class="order-status__id tabular-nums">{{order.order_id}}</text>
     </view>
-  </view>
 
-  <view class="timeline card">
-    <text class="card-title">订单状态</text>
-    <block wx:for="{{timeline}}" wx:key="title">
-      <view class="timeline-row {{item.state}}">
-        <view class="dot"></view>
-        <view>
-          <text class="timeline-title">{{item.title}}</text>
-          <text class="timeline-time">{{item.time}}</text>
-        </view>
+    <view class="order-item surface-card">
+      <image wx:if="{{item.images[0].src}}" class="order-item__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
+      <view wx:else class="order-item__placeholder">{{item.images[0].emoji}}</view>
+      <view class="order-item__copy">
+        <text class="order-item__title">{{item.title}}</text>
+        <text class="order-item__price money">成交价 ¥{{order.deal_price}}</text>
+        <text class="order-item__location">{{order.meetup_location}}</text>
       </view>
-    </block>
-  </view>
-
-  <view class="location-card card">
-    <text class="card-title">⌖ 交易地点</text>
-    <view class="map">
-      <text>宿舍区</text>
-      <text>图书馆</text>
-      <text>教学楼</text>
     </view>
-    <text class="place">图书馆南门</text>
-    <text class="meta">步行约3分钟 · 监控覆盖 · 平台认证安全点</text>
+
+    <view class="timeline surface-card">
+      <text class="timeline__title">交易进度</text>
+      <view wx:for="{{timeline}}" wx:key="title" class="timeline-row">
+        <view class="timeline-row__mark timeline-row__mark--{{item.state}}"></view>
+        <text class="timeline-row__title">{{item.title}}</text>
+      </view>
+    </view>
+
+    <view class="snapshot surface-card">
+      <text class="snapshot__title">成交快照</text>
+      <view class="snapshot-row">
+        <text>商品成交价</text>
+        <text class="money">¥{{order.deal_price}}</text>
+      </view>
+      <view class="snapshot-row">
+        <text>担保费</text>
+        <text class="money">¥{{order.guarantee_fee}}</text>
+      </view>
+      <view class="snapshot-row">
+        <text>面交优惠</text>
+        <text class="money">-¥{{order.discount_amount}}</text>
+      </view>
+      <view class="snapshot-row snapshot-row--total">
+        <text>合计</text>
+        <text class="money">¥{{order.total_amount}}</text>
+      </view>
+    </view>
+
+    <text wx:if="{{errorMessage}}" class="order-error">{{errorMessage}}</text>
+
+    <view class="order-actions">
+      <button
+        wx:if="{{order.trade_status === 'wait_meetup'}}"
+        class="button-base button-primary pressable"
+        hover-class="pressable--active"
+        disabled="{{submitting}}"
+        bindtap="complete"
+      >确认完成面交</button>
+      <button
+        wx:if="{{order.trade_status === 'wait_pay' || order.trade_status === 'wait_meetup'}}"
+        class="button-base button-danger pressable"
+        hover-class="pressable--active"
+        disabled="{{submitting}}"
+        bindtap="cancel"
+      >取消订单</button>
+    </view>
   </view>
 
-  <view class="qr card">
-    <text class="qr-text">收货验证码</text>
-    <text class="qr-sub">面交时出示此码，卖家扫码确认交收</text>
-    <view class="qr-box">▦</view>
-    <text class="valid">验证码有效 · 04:28</text>
-  </view>
-
-  <view class="bottom-actions">
-    <button class="contact" bindtap="contactSeller">联系卖家</button>
-    <button class="confirm" bindtap="verify">{{verified ? '已确认' : '确认收货'}}</button>
+  <view wx:elif="{{state === 'not-found'}}" class="state-panel">
+    <text class="state-panel__title">订单不存在</text>
+    <text class="state-panel__description">无效订单不会回退或修改其他订单。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 </view>

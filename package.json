@@ -1,8 +1,10 @@
 {
   "name": "linshe-wechat-miniprogram",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "check": "node scripts/check-project.js"
+    "check": "node scripts/check-project.js && node scripts/validate-ui-contracts.js",
+    "test": "node --test",
+    "ci": "npm run check && npm test"
   }
 }

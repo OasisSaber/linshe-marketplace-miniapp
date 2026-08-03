@@ -1,59 +1,143 @@
-<view class="page">
-  <view wx:if="{{!isVerified}}" class="notice card">
-    <text>完成学生认证后才能发布和收款。</text>
-    <button class="primary-button" bindtap="goVerify">去认证</button>
-  </view>
-
-  <view class="photo-row card">
-    <view class="photo-add">＋<text>添加图片</text></view>
-    <view class="photo-cover">🧹<text>封面</text></view>
-    <view class="photo-empty">＋</view>
-    <view class="photo-empty">＋</view>
-  </view>
-
-  <view class="form">
-    <input value="{{form.title}}" bindinput="onTitleInput" placeholder="商品标题（5-30字，描述清晰更好卖）" />
-    <textarea placeholder="描述成色、使用情况、附件配件等（10字以上），让买家更放心～" />
-    <view class="price-input">
-      <text>¥</text>
-      <input value="{{form.price}}" bindinput="onPriceInput" placeholder="设置价格" type="digit" />
+<view class="page publish-page">
+  <view wx:if="{{!isVerified}}" class="verification-banner surface-card">
+    <view class="verification-banner__copy">
+      <text class="verification-banner__title">完成学生认证后才能发布</text>
+      <text class="verification-banner__description">认证仅用于本地 Demo 流程，不会上传真实证件。</text>
     </view>
+    <button
+      class="button-base button-secondary pressable"
+      hover-class="pressable--active"
+      bindtap="goVerify"
+      aria-label="前往学生认证"
+    >去认证</button>
+  </view>
 
-    <view class="field card">
-      <text class="field-label">分类</text>
-      <view class="chips">
-        <block wx:for="{{categories}}" wx:key="*this">
-          <view class="chip {{activeCategory === item ? 'active' : ''}}" data-value="{{item}}" bindtap="selectCategory">{{item}}</view>
-        </block>
+  <view class="publish-section">
+    <text class="section-title">商品信息</text>
+
+    <view class="image-placeholder surface-card pressable" hover-class="pressable--active" bindtap="showImageNotice" role="button">
+      <view class="image-placeholder__mark">+</view>
+      <view class="image-placeholder__copy">
+        <text class="image-placeholder__title">添加商品图片</text>
+        <text class="image-placeholder__description">演示占位，不会上传到云端</text>
       </view>
     </view>
 
-    <view class="field card">
-      <text class="field-label">成色</text>
-      <view class="chips condition-chips">
+    <view class="field">
+      <text class="field__label">商品标题</text>
+      <input
+        class="field__control {{errorField === 'title' ? 'field__control--error' : ''}}"
+        data-field="title"
+        value="{{form.title}}"
+        maxlength="30"
+        bindinput="updateField"
+        placeholder="5–30 字，写清品牌、型号和物品"
+        aria-label="商品标题"
+      />
+      <text wx:if="{{errorField === 'title'}}" class="field__error">{{errorMessage}}</text>
+      <text wx:else class="field__helper">{{form.title.length}} / 30</text>
+    </view>
+
+    <view class="field">
+      <text class="field__label">商品描述</text>
+      <textarea
+        class="field__control field__control--textarea {{errorField === 'description' ? 'field__control--error' : ''}}"
+        data-field="description"
+        value="{{form.description}}"
+        maxlength="300"
+        bindinput="updateField"
+        placeholder="至少 10 字，说明成色、使用情况和配件"
+        aria-label="商品描述"
+      />
+      <text wx:if="{{errorField === 'description'}}" class="field__error">{{errorMessage}}</text>
+    </view>
+
+    <view class="field">
+      <text class="field__label">价格</text>
+      <view class="price-control field__control {{errorField === 'price' ? 'field__control--error' : ''}}">
+        <text class="price-control__prefix">¥</text>
+        <input
+          class="price-control__input tabular-nums"
+          data-field="price"
+          value="{{form.price}}"
+          type="digit"
+          bindinput="updateField"
+          placeholder="0.00"
+          aria-label="商品价格"
+        />
+      </view>
+      <text wx:if="{{errorField === 'price'}}" class="field__error">{{errorMessage}}</text>
+    </view>
+  </view>
+
+  <view class="publish-section">
+    <text class="section-title">分类与成色</text>
+
+    <view class="field">
+      <text class="field__label">分类</text>
+      <view class="chip-row">
+        <block wx:for="{{categories}}" wx:key="value">
+          <view
+            class="chip pressable {{form.category === item.value ? 'chip--active' : ''}}"
+            hover-class="pressable--active"
+            data-value="{{item.value}}"
+            bindtap="selectCategory"
+            aria-label="选择分类 {{item.label}}"
+           role="button">{{item.label}}</view>
+        </block>
+      </view>
+      <text wx:if="{{errorField === 'category'}}" class="field__error">{{errorMessage}}</text>
+    </view>
+
+    <view class="field">
+      <text class="field__label">成色</text>
+      <view class="chip-row">
         <block wx:for="{{conditions}}" wx:key="*this">
-          <view class="condition-chip {{activeCondition === item ? 'active' : ''}}" data-value="{{item}}" bindtap="selectCondition">{{item}}</view>
+          <view
+            class="chip pressable {{form.condition === item ? 'chip--active' : ''}}"
+            hover-class="pressable--active"
+            data-value="{{item}}"
+            bindtap="selectCondition"
+            aria-label="选择成色 {{item}}"
+           role="button">{{item}}</view>
         </block>
       </view>
+      <text wx:if="{{errorField === 'condition'}}" class="field__error">{{errorMessage}}</text>
     </view>
-
-    <view class="location-row card">
-      <view class="location-icon">⌖</view>
-      <view>
-        <text class="location-title">宿舍楼A · 3号楼218室</text>
-        <text class="location-sub">GPS自动定位</text>
-      </view>
-    </view>
-
-    <view class="switch-row card">
-      <view>
-        <text class="location-title">支持校内面交</text>
-        <text class="location-sub">开启后买家可选择校园内安全地点当面交易</text>
-      </view>
-      <switch checked color="#22C55E" />
-    </view>
-
-    <button class="primary-button publish-button" bindtap="submit">🚀 立即发布</button>
-    <text class="publish-note">仅对已认证校园学生可见</text>
   </view>
+
+  <view class="publish-section">
+    <text class="section-title">面交设置</text>
+    <view class="setting-row surface-card">
+      <view class="setting-row__copy">
+        <text class="setting-row__title">校内面交</text>
+        <text class="setting-row__description">建议在公共区域当面检查商品</text>
+      </view>
+      <switch checked="{{form.supports_meetup}}" color="{{brandColor}}" bindchange="toggleMeetup" />
+    </view>
+
+    <view
+      class="location-row surface-card pressable"
+      hover-class="pressable--active"
+      bindtap="chooseLocation"
+      aria-label="选择面交地点"
+     role="button">
+      <view class="location-row__copy">
+        <text class="location-row__label">面交地点</text>
+        <text class="location-row__value">{{form.campus_location}}</text>
+      </view>
+      <text class="location-row__action">更改</text>
+    </view>
+    <text wx:if="{{errorField === 'campus_location'}}" class="field__error">{{errorMessage}}</text>
+  </view>
+
+  <text wx:if="{{errorMessage && !errorField}}" class="form-error" role="alert">{{errorMessage}}</text>
+
+  <button
+    class="button-base button-primary pressable submit-button"
+    hover-class="pressable--active"
+    disabled="{{submitting}}"
+    bindtap="submit"
+    aria-label="发布商品"
+  >{{submitting ? '正在发布…' : '发布商品'}}</button>
 </view>

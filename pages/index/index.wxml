@@ -1,48 +1,83 @@
-<view class="page index-page">
-  <view class="search-row">
-    <view class="campus">{{campus}}⌄</view>
-    <view class="search card">
-      <text class="search-icon">⌕</text>
-      <input value="{{keyword}}" bindinput="onSearchInput" placeholder="搜索校园好物…" />
+<view class="page home-page">
+  <view class="home-header">
+    <view>
+      <text class="home-eyebrow">{{campus}} · 校内闲置</text>
+      <text class="home-title">发现附近好物</text>
     </view>
-    <view class="filter-button" bindtap="openFilter">⌁</view>
+    <view class="home-count">
+      <text class="home-count__value tabular-nums">{{feedCount}}</text>
+      <text class="home-count__label">件商品</text>
+    </view>
   </view>
 
-  <scroll-view class="category-scroll" scroll-x>
-    <block wx:for="{{categories}}" wx:key="name">
-      <view class="category-item {{activeCategory === item.name ? 'active' : ''}}" data-name="{{item.name}}" bindtap="selectCategory">
-        <view class="category-icon">{{item.icon}}</view>
-        <text>{{item.name}}</text>
-      </view>
-    </block>
+  <view class="home-search surface-card">
+    <input
+      class="home-search__input"
+      value="{{keyword}}"
+      bindinput="onSearchInput"
+      placeholder="搜索商品标题或校内地点"
+      confirm-type="search"
+      aria-label="搜索商品"
+    />
+    <button
+      class="home-search__button button-ghost pressable"
+      hover-class="pressable--active"
+      bindtap="openFilter"
+    >筛选</button>
+  </view>
+
+  <scroll-view class="home-categories" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="category-row">
+      <block wx:for="{{categories}}" wx:key="name">
+        <view
+          class="chip pressable {{activeCategory === item.name ? 'chip--active' : ''}}"
+          hover-class="pressable--active"
+          data-name="{{item.name}}"
+          bindtap="selectCategory"
+         role="button">{{item.label}}</view>
+      </block>
+    </view>
   </scroll-view>
 
-  <view class="hero" bindtap="openPromotion">
-    <text class="hero-title">🎓 开学特惠季</text>
-    <text class="hero-copy">精选校园二手好物 · 最低至2折</text>
-    <view class="hero-action" catchtap="openPromotion">立即抢购 →</view>
-    <text class="hero-cart">🛒</text>
+  <view wx:if="{{loading}}" class="state-panel">
+    <text class="state-panel__title">正在加载商品</text>
+    <text class="state-panel__description">本地 Demo 数据即将准备完成。</text>
   </view>
 
-  <view class="feed-header">
-    <text class="section-title">附近好物</text>
-    <text class="feed-count">500米内 · 共{{feedCount}}件</text>
-  </view>
-
-  <view class="feed">
-    <block wx:for="{{items}}" wx:key="item_id">
-      <view class="item-card card" data-id="{{item.item_id}}" bindtap="openDetail">
-        <view class="item-cover">
-          <text>{{item.images[0]}}</text>
-          <view class="favorite {{item.isFavorite ? 'active' : ''}}" data-id="{{item.item_id}}" catchtap="toggleFavorite">{{item.isFavorite ? '♥' : '♡'}}</view>
-        </view>
-        <view class="item-body">
-          <text class="price">¥{{item.price}}</text>
-          <text class="item-title">{{item.title}}</text>
-          <text class="condition">{{item.condition}}</text>
-          <text class="item-location">📍{{item.campus_location}}</text>
+  <view wx:elif="{{items.length}}" class="product-grid">
+    <view wx:for="{{items}}" wx:key="item_id" class="product-card surface-card">
+      <view
+        class="product-card__main pressable"
+        hover-class="pressable--active"
+        data-id="{{item.item_id}}"
+        bindtap="openDetail"
+        aria-label="查看 {{item.title}}"
+       role="button">
+        <image wx:if="{{item.images[0].src}}" class="product-card__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
+        <view wx:else class="product-card__placeholder">{{item.images[0].emoji}}</view>
+        <view class="product-card__copy">
+          <text class="product-card__title">{{item.title}}</text>
+          <text class="product-card__meta">{{item.condition}} · {{item.campus_location}}</text>
+          <view class="product-card__footer">
+            <text class="product-card__price money">¥{{item.price}}</text>
+            <text wx:if="{{item.status !== 'on_sale'}}" class="status-chip">{{item.statusLabel}}</text>
+          </view>
         </view>
       </view>
-    </block>
+
+      <button
+        class="product-card__favorite button-ghost pressable {{item.isFavorite ? 'product-card__favorite--active' : ''}}"
+        hover-class="pressable--active"
+        data-id="{{item.item_id}}"
+        bindtap="toggleFavorite"
+        aria-label="{{item.isFavorite ? '取消收藏' : '收藏'}} {{item.title}}"
+      >{{item.isFavorite ? '已收藏' : '收藏'}}</button>
+    </view>
+  </view>
+
+  <view wx:else class="state-panel">
+    <text class="state-panel__title">没有匹配商品</text>
+    <text class="state-panel__description">尝试清除关键词或切换到“全部”分类。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="resetSearch">清除筛选</button>
   </view>
 </view>

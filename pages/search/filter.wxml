@@ -1,41 +1,81 @@
-<view class="page">
-  <view class="search-header">
-    <view class="search-box">
-      <text class="search-text">{{query}}</text>
-      <text class="clear">×</text>
+<view class="page search-page">
+  <view class="search-control surface-card">
+    <input
+      class="search-control__input"
+      value="{{keyword}}"
+      bindinput="updateKeyword"
+      placeholder="搜索商品标题或校内地点"
+      confirm-type="search"
+      aria-label="搜索商品"
+    />
+    <button class="search-control__clear button-ghost pressable" hover-class="pressable--active" bindtap="clearFilters">清除</button>
+  </view>
+
+  <scroll-view class="category-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="category-row">
+      <block wx:for="{{categories}}" wx:key="*this">
+        <view
+          class="chip pressable {{category === item ? 'chip--active' : ''}}"
+          hover-class="pressable--active"
+          data-value="{{item}}"
+          bindtap="selectCategory"
+         role="button">{{item}}</view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <view class="filter-panel surface-card">
+    <view class="sort-row">
+      <block wx:for="{{sorts}}" wx:key="value">
+        <view
+          class="sort-option pressable {{sortBy === item.value ? 'sort-option--active' : ''}}"
+          hover-class="pressable--active"
+          data-value="{{item.value}}"
+          bindtap="selectSort"
+         role="button">{{item.label}}</view>
+      </block>
+    </view>
+
+    <view class="meetup-toggle">
+      <view>
+        <text class="meetup-toggle__title">仅看支持面交</text>
+        <text class="meetup-toggle__description">过滤不支持校内面交的商品</text>
+      </view>
+      <switch checked="{{meetupOnly}}" color="{{brandColor}}" bindchange="toggleMeetup" />
     </view>
   </view>
 
-  <scroll-view class="filter-scroll" scroll-x>
-    <view class="filter-row">
-      <button
-        wx:for="{{filters}}"
-        wx:key="*this"
-        class="filter-chip {{activeSort === item ? 'active' : ''}}"
-        data-value="{{item}}"
-        bindtap="selectSort"
-      >{{item}}</button>
-    </view>
-  </scroll-view>
+  <view class="result-header">
+    <text class="result-header__title">搜索结果</text>
+    <text class="result-header__count tabular-nums">{{results.length}} 件</text>
+  </view>
 
-  <view class="result-count">找到 <text>42</text> 件相关闲置</view>
-
-  <scroll-view class="result-scroll" scroll-y>
-    <view class="result-grid">
-      <view wx:for="{{results}}" wx:key="id" class="result-card" data-id="{{item.item_id}}" bindtap="openDetail">
-        <view class="cover cover-{{item.bg}}">
-          <text>{{item.emoji}}</text>
-        </view>
-        <view class="card-body">
-          <view class="price">¥{{item.price}}</view>
-          <view class="title">{{item.title}}</view>
-          <text class="condition">{{item.condition}}</text>
-          <view class="meta">
-            <text class="seller">{{item.seller}}</text>
-            <text class="distance">📍{{item.distance}}</text>
-          </view>
+  <view wx:if="{{results.length}}" class="result-list">
+    <view
+      wx:for="{{results}}"
+      wx:key="item_id"
+      class="result-card surface-card pressable"
+      hover-class="pressable--active"
+      data-id="{{item.item_id}}"
+      bindtap="openDetail"
+      aria-label="查看 {{item.title}}"
+     role="button">
+      <image wx:if="{{item.images[0].src}}" class="result-card__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
+      <view wx:else class="result-card__placeholder">{{item.images[0].emoji}}</view>
+      <view class="result-card__copy">
+        <text class="result-card__title">{{item.title}}</text>
+        <text class="result-card__meta">{{item.condition}} · {{item.campus_location}}</text>
+        <view class="result-card__bottom">
+          <text class="result-card__price money">¥{{item.price}}</text>
+          <text wx:if="{{item.supports_meetup}}" class="status-chip">支持面交</text>
         </view>
       </view>
     </view>
-  </scroll-view>
+  </view>
+
+  <view wx:else class="state-panel">
+    <text class="state-panel__title">没有找到匹配商品</text>
+    <text class="state-panel__description">尝试缩短关键词，或清除分类与面交筛选。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="clearFilters">清除筛选</button>
+  </view>
 </view>

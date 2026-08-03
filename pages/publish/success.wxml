@@ -1,25 +1,26 @@
-<view class="page">
-  <view class="success-body">
-    <view class="success-mark">
-      <view class="halo one"></view>
-      <view class="halo two"></view>
-      <view class="check">✓</view>
-    </view>
-    <view class="title">发布成功</view>
-    <view class="desc">你的闲置已上架到「北京大学」校区，分享给同学可以更快卖出哦</view>
+<view class="page success-page">
+  <view wx:if="{{state === 'ready'}}" class="success-card surface-card">
+    <view class="success-mark">✓</view>
+    <text class="success-title">发布成功</text>
+    <text class="success-description">商品已加入本地 Demo 数据，可立即在首页和分类中查看。</text>
 
-    <view class="item-card">
-      <view class="thumb">{{item.emoji}}</view>
-      <view class="item-main">
-        <view class="item-title">{{item.title}}</view>
-        <view class="price">¥{{item.price}}</view>
+    <view class="created-item">
+      <image wx:if="{{item.images[0].src}}" class="created-item__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
+      <view wx:else class="created-item__placeholder">{{item.images[0].emoji}}</view>
+      <view class="created-item__copy">
+        <text class="created-item__title">{{item.title}}</text>
+        <text class="created-item__price money">¥{{item.price}}</text>
+        <text class="created-item__meta">{{item.category}} · {{item.condition}}</text>
       </view>
-      <text class="status">{{item.status}}</text>
     </view>
+
+    <button class="button-base button-primary pressable" hover-class="pressable--active" bindtap="openItem">查看商品</button>
+    <button class="button-base button-ghost pressable" hover-class="pressable--active" bindtap="goHome">返回首页</button>
   </view>
 
-  <view class="actions">
-    <button class="primary" bindtap="shareItem">↗ 分享给同学</button>
-    <button class="secondary" bindtap="viewMine">◎ 查看我的发布</button>
+  <view wx:elif="{{state === 'not-found'}}" class="state-panel">
+    <text class="state-panel__title">未找到刚发布的商品</text>
+    <text class="state-panel__description">页面参数可能已失效，请返回首页查看商品列表。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goHome">返回首页</button>
   </view>
 </view>
