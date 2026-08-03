@@ -53,6 +53,15 @@
 首次演练任务: /TheMasterplan 采用（明确人类授权：当前会话选择“采用/安装 TheMasterplan”）
 Jujutsu 版本: 0.43.0-89f62ede8c1c611eaf134c0c49252efd65c7945d
 Git 版本: 2.54.0
-平台与验证入口: Windows / Bash（scripts/check.sh）
-验证状态: PARTIAL（尚未在目标平台完成 TheMasterplan 发布烟雾测试）
+平台与验证入口: Windows / Bash（scripts/check.sh；无 check.ps1/pwsh，PowerShell 委托入口不在采用范围）
+验证状态: VERIFIED（Windows Bash 入口端到端演练通过，见下方演练记录）
 首次演练 PR: https://github.com/OasisSaber/linshe-marketplace-miniapp/pull/16
+
+### 演练记录（2026-08-03）
+
+- 演练任务: Issue #8 fix(auth): validate campus email and demo verification code deterministically
+- 演练 PR: https://github.com/OasisSaber/linshe-marketplace-miniapp/pull/17（Draft 创建 → 人类 Squash Merge）
+- 合并提交: 814495d36c3ef1702dce77485e9f070023e81ef6
+- 变更文件: services/auth.js、pages/auth/login.js、DEMO_GUIDE.md、test/auth.test.js、package.json
+- 验证结果: bash scripts/check.sh（npm run check）通过；npm test 8/8 通过；CI aw-check（aw-check.yml@v1）通过
+- 平台限制: Windows / Bash 入口完成端到端演练；scripts/ 无 check.ps1 且 pwsh 不可用
