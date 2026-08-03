@@ -1,28 +1,63 @@
-const { completeDemoOrder, getOrderView } = require("../../services/orders");
-const { getChatByItemId } = require("../../services/chats");
+const {
+  completeDemoOrder,
+  cancelDemoOrder,
+  getOrderView
+} = require("../../services/orders");
 
 Page({
   data: {
+    state: "loading",
     order: null,
     item: null,
-    verified: false,
-    timeline: [
-      { title: "订单已创建", time: "2024-03-15 10:23", state: "done" },
-      { title: "卖家已确认", time: "2024-03-15 10:45", state: "done" },
-      { title: "等待校内面交", time: "预计今天下午 3:00", state: "current" },
-      { title: "交易完成", time: "等待双方确认", state: "" }
-    ]
+    timeline: [],
+    statusLabel: "",
+    errorMessage: "",
+    submitting: false
   },
+
   onLoad(options) {
-    this.setData(getOrderView(options.order_id));
+    this.loadOrder(options.order_id);
   },
-  verify() {
-    const order = completeDemoOrder(this.data.order.order_id);
-    this.setData(getOrderView(order.order_id));
-    wx.showToast({ title: "Demo 核销已通过", icon: "success" });
+
+  loadOrder(orderId) {
+    const result = getOrderView(orderId);
+    if (!result.ok) {
+      this.setData({ state: "not-found" });
+      return;
+    }
+    this.setData({
+      state: "ready",
+      ...result.data,
+      errorMessage: ""
+    });
   },
-  contactSeller() {
-    const chat = getChatByItemId(this.data.item.item_id);
-    wx.navigateTo({ url: `/pages/message/chat?chat_id=${chat.id}` });
+
+  complete() {
+    this.runTransition(completeDemoOrder);
+  },
+
+  cancel() {
+    this.runTransition(cancelDemoOrder);
+  },
+
+  runTransition(action) {
+    if (this.data.submitting || !this.data.order) return;
+    this.setData({ submitting: true, errorMessage: "" });
+
+    const result = action(this.data.order.order_id);
+    if (!result.ok) {
+      this.setData({
+        submitting: false,
+        errorMessage: result.error.message
+      });
+      return;
+    }
+
+    this.setData({ submitting: false });
+    this.loadOrder(result.data.order_id);
+  },
+
+  goBack() {
+    wx.navigateBack();
   }
 });

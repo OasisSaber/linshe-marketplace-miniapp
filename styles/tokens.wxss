@@ -1,18 +1,54 @@
 page {
-  --color-bg: #f7f8fa;
+  --color-bg: #f4f6f8;
   --color-surface: #ffffff;
-  --color-text: #121318;
-  --color-muted: #6b6e85;
-  --color-border: #e2e4ec;
-  --color-brand: #22c55e;
-  --color-brand-dark: #16a34a;
-  --color-brand-soft: #dcfce7;
-  --color-warm: #f59e0b;
-  --color-warn: #92400e;
-  --radius-sm: 12rpx;
-  --radius-card: 24rpx;
-  --space-sm: 16rpx;
-  --space-md: 24rpx;
-  --space-lg: 32rpx;
-  --shadow-card: 0 4rpx 16rpx rgba(18, 19, 24, 0.04);
+  --color-surface-subtle: #f8faf9;
+  --color-text: #111814;
+  --color-text-secondary: #445148;
+  --color-muted: #68756d;
+  --color-border: #dce4df;
+  --color-border-strong: #bdcbc2;
+
+  --color-brand: #1fa35a;
+  --color-on-brand: #ffffff;
+  --color-brand-strong: #158347;
+  --color-brand-soft: #e8f7ee;
+  --color-brand-text: #0d6a38;
+  --color-brand-border: rgba(31, 163, 90, 0.36);
+  --color-image-outline: rgba(0, 0, 0, 0.1);
+
+  --color-danger: #c53b3b;
+  --color-danger-soft: #fff0f0;
+  --color-warning: #a35a00;
+  --color-warning-soft: #fff5df;
+  --color-info: #2463a7;
+  --color-info-soft: #edf5ff;
+
+  --radius-xs: 12rpx;
+  --radius-sm: 18rpx;
+  --radius-card: 28rpx;
+  --radius-large: 36rpx;
+  --radius-pill: 999rpx;
+
+  --space-1: 8rpx;
+  --space-2: 16rpx;
+  --space-3: 24rpx;
+  --space-4: 32rpx;
+  --space-5: 48rpx;
+  --space-6: 64rpx;
+
+  --touch-min: 88rpx;
+
+  --shadow-card:
+    0 1rpx 2rpx rgba(17, 24, 20, 0.04),
+    0 8rpx 24rpx rgba(17, 24, 20, 0.06);
+  --shadow-float:
+    0 2rpx 4rpx rgba(17, 24, 20, 0.06),
+    0 16rpx 40rpx rgba(17, 24, 20, 0.12);
+  --shadow-brand:
+    0 1rpx 2rpx rgba(10, 87, 46, 0.12),
+    0 8rpx 20rpx rgba(31, 163, 90, 0.2);
+
+  --duration-fast: 100ms;
+  --duration-standard: 180ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
 }

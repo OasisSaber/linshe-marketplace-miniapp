@@ -1,25 +1,42 @@
-<view class="page">
-  <view class="tabs">
-    <view wx:for="{{tabs}}" wx:key="*this" class="{{activeTab === item ? 'active' : ''}}" data-tab="{{item}}" bindtap="setTab">{{item}}</view>
+<view class="page favorites-page">
+  <view class="favorites-header">
+    <view>
+      <text class="favorites-header__title">我的收藏</text>
+      <text class="favorites-header__description">收藏状态在首页、详情和个人中心同步</text>
+    </view>
+    <text class="favorites-header__count tabular-nums">{{items.length}} 件</text>
   </view>
 
-  <scroll-view class="list" scroll-y>
-    <view wx:for="{{items}}" wx:key="id" class="fav-card" data-id="{{item.item_id}}" bindtap="openDetail">
-      <view class="thumb">{{item.emoji}}</view>
-      <view class="main">
-        <view class="title">{{item.title}}</view>
-        <view class="meta">
-          <text wx:if="{{item.tag}}" class="drop">{{item.tag}}</text>
-          <text>{{item.location}}</text>
-        </view>
-        <view class="bottom">
-          <view>
-            <text class="price">¥{{item.price}}</text>
-            <text wx:if="{{item.originalPrice}}" class="original">¥{{item.originalPrice}}</text>
-          </view>
-          <button catchtap="removeFavorite">♥ 取消收藏</button>
+  <view wx:if="{{items.length}}" class="favorite-list">
+    <view wx:for="{{items}}" wx:key="item_id" class="favorite-card surface-card">
+      <view
+        class="favorite-card__main pressable"
+        hover-class="pressable--active"
+        data-id="{{item.item_id}}"
+        bindtap="openDetail"
+        aria-label="查看 {{item.title}}"
+       role="button">
+        <image wx:if="{{item.images[0].src}}" class="favorite-card__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
+        <view wx:else class="favorite-card__placeholder">{{item.images[0].emoji}}</view>
+        <view class="favorite-card__copy">
+          <text class="favorite-card__title">{{item.title}}</text>
+          <text class="favorite-card__meta">{{item.condition}} · {{item.campus_location}}</text>
+          <text class="favorite-card__price money">¥{{item.price}}</text>
         </view>
       </view>
+      <button
+        class="favorite-card__remove button-base button-ghost pressable"
+        hover-class="pressable--active"
+        data-id="{{item.item_id}}"
+        bindtap="removeFavorite"
+        aria-label="取消收藏 {{item.title}}"
+      >取消收藏</button>
     </view>
-  </scroll-view>
+  </view>
+
+  <view wx:else class="state-panel">
+    <text class="state-panel__title">还没有收藏商品</text>
+    <text class="state-panel__description">在首页或商品详情点击收藏后，会统一出现在这里。</text>
+    <button class="button-base button-primary pressable" hover-class="pressable--active" bindtap="goShopping">去逛逛</button>
+  </view>
 </view>

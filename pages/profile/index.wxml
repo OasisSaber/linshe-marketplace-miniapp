@@ -1,47 +1,43 @@
-<view class="page">
-  <scroll-view class="content" scroll-y>
-    <view class="profile-head">
-      <view class="avatar-wrap">
-        <view class="avatar">李</view>
-      </view>
-      <view class="verify {{isVerified ? 'verified' : ''}}" bindtap="goVerify">
-        <text>{{isVerified ? '✓' : '⌾'}}</text>
-        <text>{{isVerified ? '已学生认证' : '去学生认证'}}</text>
-      </view>
-      <view class="name">李同学</view>
-      <view class="school">北京大学 · 信息管理学院 大三</view>
-      <view class="stats">
-        <view wx:for="{{stats}}" wx:key="label" class="stat">
-          <view>{{item.value}}</view>
-          <text>{{item.label}}</text>
-        </view>
-      </view>
+<view class="page profile-page">
+  <view class="profile-hero surface-card">
+    <view class="profile-avatar">邻</view>
+    <view class="profile-copy">
+      <text class="profile-name">邻舍 Demo 用户</text>
+      <text class="profile-meta">{{isVerified ? '已完成 Demo 学生认证' : '尚未完成学生认证'}}</text>
     </view>
+    <button
+      wx:if="{{!isVerified}}"
+      class="button-base button-secondary pressable profile-verify"
+      hover-class="pressable--active"
+      bindtap="goVerify"
+    >去认证</button>
+  </view>
 
-    <view class="member-card" bindtap="openWallet">
-      <view>
-        <view class="member-title">🌿 绿色会员</view>
-        <view class="member-sub">环保交易积分</view>
-      </view>
-      <view class="points">积分×<text>320</text></view>
+  <view class="profile-stats surface-card">
+    <view wx:for="{{stats}}" wx:key="label" class="profile-stat">
+      <text class="profile-stat__value tabular-nums">{{item.value}}</text>
+      <text class="profile-stat__label">{{item.label}}</text>
     </view>
+  </view>
 
-    <view class="shortcut-card">
-      <view wx:for="{{shortcuts}}" wx:key="label" class="shortcut" data-url="{{item.url}}" bindtap="openShortcut">
-        <view class="shortcut-icon">
-          <text>□</text>
-          <text class="dot">{{item.count}}</text>
-        </view>
-        <text>{{item.label}}</text>
+  <view class="profile-section">
+    <text class="section-title">常用功能</text>
+    <view class="profile-list surface-card">
+      <view
+        wx:for="{{shortcuts}}"
+        wx:key="label"
+        class="profile-row pressable"
+        hover-class="pressable--active"
+        data-url="{{item.url}}"
+        bindtap="openShortcut"
+       role="button">
+        <text class="profile-row__label">{{item.label}}</text>
+        <text class="profile-row__action">{{item.url ? '查看' : '演示中'}}</text>
+      </view>
+      <view class="profile-row pressable" hover-class="pressable--active" bindtap="openWallet" role="button">
+        <text class="profile-row__label">Demo 钱包</text>
+        <text class="profile-row__action">查看</text>
       </view>
     </view>
-
-    <view class="menu-card">
-      <view wx:for="{{menu}}" wx:key="label" class="menu-row" data-url="{{item.url}}" bindtap="openMenu">
-        <text class="menu-icon">{{item.icon}}</text>
-        <text class="menu-label">{{item.label}}</text>
-        <text class="arrow">›</text>
-      </view>
-    </view>
-  </scroll-view>
+  </view>
 </view>

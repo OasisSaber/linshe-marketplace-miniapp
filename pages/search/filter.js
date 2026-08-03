@@ -1,23 +1,76 @@
+const { queryItems } = require("../../services/search");
+const { CANONICAL_CATEGORIES } = require("../../services/items");
+const { THEME } = require("../../config/theme");
+
+function safeDecode(value) {
+  try {
+    return decodeURIComponent(String(value || ""));
+  } catch (error) {
+    return String(value || "");
+  }
+}
+
 Page({
   data: {
-    query: "高数教材",
-    activeSort: "综合排序",
-    filters: ["综合排序", "价格最低", "最新发布", "仅看面交", "仅看图书"],
-    results: [
-      { id: "r_001", item_id: "item_001", emoji: "📚", bg: "yellow", price: 22, title: "高等数学 第八版 同济大学", condition: "9成新", seller: "赵", distance: "120米" },
-      { id: "r_002", item_id: "item_001", emoji: "📖", bg: "red", price: 35, title: "高数辅导书 全套 张宇考研", condition: "良好", seller: "钱", distance: "280米" },
-      { id: "r_003", item_id: "item_001", emoji: "📒", bg: "purple", price: 15, title: "高数习题集 带答案 详解版", condition: "良好", seller: "孙", distance: "90米" },
-      { id: "r_004", item_id: "item_001", emoji: "📗", bg: "green", price: 28, title: "同济高数 第七版 无笔记", condition: "9成新", seller: "李", distance: "350米" },
-      { id: "r_005", item_id: "item_001", emoji: "📘", bg: "blue", price: 20, title: "线性代数 第六版 浙大版", condition: "全新", seller: "周", distance: "180米" },
-      { id: "r_006", item_id: "item_001", emoji: "📕", bg: "pink", price: 18, title: "概率论与数理统计 盛骤版", condition: "良好", seller: "吴", distance: "220米" }
-    ]
+    keyword: "",
+    brandColor: THEME.brandColor,
+    category: "全部",
+    sortBy: "relevance",
+    meetupOnly: false,
+    categories: ["全部", ...CANONICAL_CATEGORIES],
+    sorts: [
+      { label: "综合", value: "relevance" },
+      { label: "价格最低", value: "price_asc" },
+      { label: "最新发布", value: "latest" }
+    ],
+    results: []
   },
-  goBack() {
-    wx.navigateBack();
+
+  onLoad(options) {
+    this.setData({ keyword: safeDecode(options.keyword) });
+    this.refresh();
   },
+
+  updateKeyword(event) {
+    this.setData({ keyword: event.detail.value });
+    this.refresh();
+  },
+
+  selectCategory(event) {
+    this.setData({ category: event.currentTarget.dataset.value });
+    this.refresh();
+  },
+
   selectSort(event) {
-    this.setData({ activeSort: event.currentTarget.dataset.value });
+    this.setData({ sortBy: event.currentTarget.dataset.value });
+    this.refresh();
   },
+
+  toggleMeetup(event) {
+    this.setData({ meetupOnly: event.detail.value });
+    this.refresh();
+  },
+
+  clearFilters() {
+    this.setData({
+      keyword: "",
+      category: "全部",
+      sortBy: "relevance",
+      meetupOnly: false
+    });
+    this.refresh();
+  },
+
+  refresh() {
+    const results = queryItems({
+      keyword: this.data.keyword,
+      category: this.data.category,
+      sortBy: this.data.sortBy,
+      meetupOnly: this.data.meetupOnly
+    });
+    this.setData({ results });
+  },
+
   openDetail(event) {
     const itemId = event.currentTarget.dataset.id;
     wx.navigateTo({ url: `/pages/goods/detail?item_id=${itemId}` });
