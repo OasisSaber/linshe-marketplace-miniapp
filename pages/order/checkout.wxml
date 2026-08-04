@@ -35,19 +35,32 @@
       <text class="checkout-helper">建议在公共区域完成验货和本地 Demo 核销。</text>
     </view>
 
-    <text wx:if="{{errorMessage}}" class="checkout-error">{{errorMessage}}</text>
+    <text wx:if="{{errorMessage}}" class="checkout-error" role="alert">{{errorMessage}}</text>
 
     <button
       class="button-base button-primary pressable checkout-submit"
       hover-class="pressable--active"
       disabled="{{submitting}}"
       bindtap="pay"
-    >{{submitting ? '正在创建订单…' : '确认 Demo 支付'}}</button>
+    >{{submitting ? '正在处理订单…' : '确认 Demo 支付'}}</button>
   </view>
 
   <view wx:elif="{{state === 'unavailable'}}" class="state-panel">
     <text class="state-panel__title">商品当前不可结算</text>
     <text class="state-panel__description">商品可能已被预订或售出，请返回查看其他商品。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
+  </view>
+
+
+  <view wx:elif="{{state === 'invalid-offer'}}" class="state-panel">
+    <text class="state-panel__title">出价信息无效</text>
+    <text class="state-panel__description">{{errorMessage}}。请返回商品页重新出价。</text>
+    <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
+  </view>
+
+  <view wx:elif="{{state === 'error'}}" class="state-panel">
+    <text class="state-panel__title">结算出错了</text>
+    <text class="state-panel__description">{{errorMessage}}。请返回商品页重新出价。</text>
     <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 

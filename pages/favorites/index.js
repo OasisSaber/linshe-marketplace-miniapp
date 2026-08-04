@@ -5,7 +5,9 @@ const {
 
 Page({
   data: {
-    items: []
+    items: [],
+    removingId: "",
+    errorMessage: ""
   },
 
   onShow() {
@@ -24,8 +26,22 @@ Page({
 
   removeFavorite(event) {
     const itemId = event.currentTarget.dataset.id;
-    removeFavorite(itemId);
+    if (!itemId || this.data.removingId) return;
+
+    this.setData({ removingId: itemId, errorMessage: "" });
+    const result = removeFavorite(itemId);
+
+    if (!result.ok) {
+      this.setData({
+        removingId: "",
+        errorMessage: result.error.message
+      });
+      wx.showToast({ title: result.error.message, icon: "none" });
+      return;
+    }
+
     this.refresh();
+    this.setData({ removingId: "", errorMessage: "" });
     wx.showToast({ title: "已取消收藏", icon: "none" });
   },
 

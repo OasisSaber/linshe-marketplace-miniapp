@@ -97,3 +97,16 @@
   color: var(--color-danger);
   font-size: 25rpx;
 }
+
+
+.favorites-error {
+  display: block;
+  margin-bottom: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1rpx solid var(--color-danger);
+  border-radius: var(--radius-sm);
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
+  font-size: 24rpx;
+  line-height: 1.5;
+}
