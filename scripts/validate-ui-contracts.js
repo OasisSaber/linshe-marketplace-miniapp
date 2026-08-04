@@ -7,7 +7,8 @@ const pageDirectories = [
   "pages/search",
   "pages/favorites",
   "pages/seller",
-  "pages/order"
+  "pages/order",
+  "pages/goods"
 ];
 
 const eventPattern = /\b(?:bindtap|catchtap|bindinput|bindchange|bindconfirm)="([A-Za-z_$][\w$]*)"/g;
