@@ -20,6 +20,7 @@ page {
   --color-danger-soft: #fff0f0;
   --color-warning: #a35a00;
   --color-warning-soft: #fff5df;
+  --color-warning-border: rgba(163, 90, 0, 0.24);
   --color-info: #2463a7;
   --color-info-soft: #edf5ff;
 

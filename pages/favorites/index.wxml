@@ -7,6 +7,8 @@
     <text class="favorites-header__count tabular-nums">{{items.length}} 件</text>
   </view>
 
+  <text wx:if="{{errorMessage}}" class="favorites-error" role="alert">{{errorMessage}}</text>
+
   <view wx:if="{{items.length}}" class="favorite-list">
     <view wx:for="{{items}}" wx:key="item_id" class="favorite-card surface-card">
       <view
@@ -29,8 +31,9 @@
         hover-class="pressable--active"
         data-id="{{item.item_id}}"
         bindtap="removeFavorite"
+        disabled="{{removingId === item.item_id}}"
         aria-label="取消收藏 {{item.title}}"
-      >取消收藏</button>
+      >{{removingId === item.item_id ? '处理中…' : '取消收藏'}}</button>
     </view>
   </view>
 
