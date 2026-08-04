@@ -137,3 +137,35 @@
 .detail-actions .button-primary {
   grid-column: 1 / -1;
 }
+
+
+.availability-banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border: 1rpx solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.availability-banner--warning {
+  border-color: var(--color-warning-border);
+  background: var(--color-warning-soft);
+}
+
+.availability-banner--neutral {
+  background: var(--color-surface-subtle);
+}
+
+.availability-banner__title {
+  color: var(--color-text);
+  font-size: 27rpx;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.availability-banner__description {
+  color: var(--color-text-secondary);
+  font-size: 24rpx;
+  line-height: 1.5;
+}

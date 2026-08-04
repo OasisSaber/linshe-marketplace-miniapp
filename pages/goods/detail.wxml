@@ -29,6 +29,15 @@
       <text class="seller-row__action">查看</text>
     </view>
 
+    <view
+      wx:if="{{item.status !== 'on_sale'}}"
+      class="availability-banner availability-banner--{{availability.tone}}"
+      role="status"
+    >
+      <text class="availability-banner__title">{{availability.title}}</text>
+      <text class="availability-banner__description">{{availability.description}}</text>
+    </view>
+
     <view class="meetup-card surface-card">
       <text class="meetup-card__label">建议面交地点</text>
       <text class="meetup-card__value">{{item.campus_location}}</text>
@@ -51,7 +60,7 @@
         hover-class="pressable--active"
         bindtap="makeOffer"
         disabled="{{item.status !== 'on_sale'}}"
-      >{{item.status === 'on_sale' ? '出价购买' : '商品交易中'}}</button>
+      >{{availability.primaryActionLabel}}</button>
     </view>
   </view>
 
