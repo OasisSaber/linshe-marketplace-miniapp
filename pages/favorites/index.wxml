@@ -1,23 +1,29 @@
+
 <view class="page favorites-page">
   <view class="favorites-header">
-    <view>
+    <text class="favorites-header__eyebrow">个人收藏</text>
+    <view class="favorites-header__row">
       <text class="favorites-header__title">我的收藏</text>
-      <text class="favorites-header__description">收藏状态在首页、详情和个人中心同步</text>
+      <text class="favorites-header__count tabular-nums">{{items.length}} 件</text>
     </view>
-    <text class="favorites-header__count tabular-nums">{{items.length}} 件</text>
+    <text class="favorites-header__description">在首页、详情与个人中心保持同步。</text>
   </view>
 
-  <text wx:if="{{errorMessage}}" class="favorites-error" role="alert">{{errorMessage}}</text>
+  <view wx:if="{{errorMessage}}" class="feedback-banner feedback-banner--danger" role="alert">
+    <text class="feedback-banner__title">操作未完成</text>
+    <text class="feedback-banner__description">{{errorMessage}}</text>
+  </view>
 
   <view wx:if="{{items.length}}" class="favorite-list">
-    <view wx:for="{{items}}" wx:key="item_id" class="favorite-card surface-card">
+    <view wx:for="{{items}}" wx:key="item_id" class="favorite-card inset-group">
       <view
         class="favorite-card__main pressable"
         hover-class="pressable--active"
         data-id="{{item.item_id}}"
         bindtap="openDetail"
         aria-label="查看 {{item.title}}"
-       role="button">
+        role="button"
+      >
         <image wx:if="{{item.images[0].src}}" class="favorite-card__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
         <view wx:else class="favorite-card__placeholder">{{item.images[0].emoji}}</view>
         <view class="favorite-card__copy">
@@ -27,19 +33,19 @@
         </view>
       </view>
       <button
-        class="favorite-card__remove button-base button-ghost pressable"
+        class="favorite-card__remove button-base button-danger pressable"
         hover-class="pressable--active"
         data-id="{{item.item_id}}"
         bindtap="removeFavorite"
         disabled="{{removingId === item.item_id}}"
         aria-label="取消收藏 {{item.title}}"
-      >{{removingId === item.item_id ? '处理中…' : '取消收藏'}}</button>
+      >{{removingId === item.item_id ? '正在移除…' : '取消收藏'}}</button>
     </view>
   </view>
 
   <view wx:else class="state-panel">
     <text class="state-panel__title">还没有收藏商品</text>
-    <text class="state-panel__description">在首页或商品详情点击收藏后，会统一出现在这里。</text>
+    <text class="state-panel__description">看到喜欢的闲置时点一下收藏，之后会统一显示在这里。</text>
     <button class="button-base button-primary pressable" hover-class="pressable--active" bindtap="goShopping">去逛逛</button>
   </view>
 </view>

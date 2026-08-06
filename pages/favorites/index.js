@@ -41,7 +41,7 @@ Page({
     }
 
     this.refresh();
-    this.setData({ removingId: "", errorMessage: "" });
+    this.setData({ removingId: "" });
     wx.showToast({ title: "已取消收藏", icon: "none" });
   },
 

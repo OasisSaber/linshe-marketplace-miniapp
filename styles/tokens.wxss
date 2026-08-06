@@ -1,55 +1,78 @@
+
 page {
-  --color-bg: #f4f6f8;
+  /* Apple-inspired semantic palette; no proprietary assets or embedded fonts. */
+  --color-bg: #f2f2f7;
   --color-surface: #ffffff;
-  --color-surface-subtle: #f8faf9;
-  --color-text: #111814;
-  --color-text-secondary: #445148;
-  --color-muted: #68756d;
-  --color-border: #dce4df;
-  --color-border-strong: #bdcbc2;
+  --color-surface-elevated: #ffffff;
+  --color-surface-subtle: #f7f7fa;
+  --color-surface-pressed: #ececf0;
 
-  --color-brand: #1fa35a;
+  --color-text: #1c1c1e;
+  --color-text-secondary: #3a3a3c;
+  --color-muted: #8e8e93;
+  --color-placeholder: #aeaeb2;
+
+  --color-border: rgba(60, 60, 67, 0.18);
+  --color-border-strong: rgba(60, 60, 67, 0.3);
+  --color-image-outline: rgba(60, 60, 67, 0.12);
+
+  --color-brand: #30b565;
   --color-on-brand: #ffffff;
-  --color-brand-strong: #158347;
-  --color-brand-soft: #e8f7ee;
-  --color-brand-text: #0d6a38;
-  --color-brand-border: rgba(31, 163, 90, 0.36);
-  --color-image-outline: rgba(0, 0, 0, 0.1);
+  --color-brand-strong: #248a4d;
+  --color-brand-soft: rgba(48, 181, 101, 0.12);
+  --color-brand-text: #187443;
+  --color-brand-border: rgba(48, 181, 101, 0.3);
 
-  --color-danger: #c53b3b;
-  --color-danger-soft: #fff0f0;
-  --color-warning: #a35a00;
-  --color-warning-soft: #fff5df;
-  --color-warning-border: rgba(163, 90, 0, 0.24);
-  --color-info: #2463a7;
-  --color-info-soft: #edf5ff;
+  --color-danger: #ff3b30;
+  --color-danger-soft: rgba(255, 59, 48, 0.1);
+  --color-danger-border: rgba(255, 59, 48, 0.24);
+  --color-warning: #c76b00;
+  --color-warning-soft: rgba(255, 149, 0, 0.12);
+  --color-warning-border: rgba(255, 149, 0, 0.28);
+  --color-info: #007aff;
+  --color-info-soft: rgba(0, 122, 255, 0.1);
+  --color-info-border: rgba(0, 122, 255, 0.24);
 
-  --radius-xs: 12rpx;
-  --radius-sm: 18rpx;
-  --radius-card: 28rpx;
-  --radius-large: 36rpx;
-  --radius-pill: 999rpx;
-
+  /* 4/8-point rhythm translated to rpx. */
   --space-1: 8rpx;
   --space-2: 16rpx;
   --space-3: 24rpx;
   --space-4: 32rpx;
   --space-5: 48rpx;
   --space-6: 64rpx;
+  --space-7: 80rpx;
 
+  --radius-xs: 12rpx;
+  --radius-control: 22rpx;
+  --radius-sm: 20rpx;
+  --radius-card: 28rpx;
+  --radius-large: 40rpx;
+  --radius-pill: 999rpx;
+
+  /* 44pt minimum target at 2rpx per logical point. */
   --touch-min: 88rpx;
+  --control-large: 100rpx;
 
-  --shadow-card:
-    0 1rpx 2rpx rgba(17, 24, 20, 0.04),
-    0 8rpx 24rpx rgba(17, 24, 20, 0.06);
+  --font-caption: 22rpx;
+  --font-footnote: 24rpx;
+  --font-body: 28rpx;
+  --font-callout: 30rpx;
+  --font-headline: 32rpx;
+  --font-title-3: 36rpx;
+  --font-title-2: 40rpx;
+  --font-title-1: 44rpx;
+  --font-large-title: 52rpx;
+
+  --shadow-card: 0 1rpx 0 rgba(60, 60, 67, 0.08);
   --shadow-float:
-    0 2rpx 4rpx rgba(17, 24, 20, 0.06),
-    0 16rpx 40rpx rgba(17, 24, 20, 0.12);
-  --shadow-brand:
-    0 1rpx 2rpx rgba(10, 87, 46, 0.12),
-    0 8rpx 20rpx rgba(31, 163, 90, 0.2);
+    0 8rpx 24rpx rgba(28, 28, 30, 0.08),
+    0 2rpx 6rpx rgba(28, 28, 30, 0.05);
+  --shadow-brand: 0 8rpx 20rpx rgba(48, 181, 101, 0.18);
+  --shadow-bottom-bar: 0 -8rpx 24rpx rgba(28, 28, 30, 0.06);
 
-  --duration-fast: 100ms;
-  --duration-standard: 180ms;
+  --duration-fast: 110ms;
+  --duration-standard: 200ms;
+  --duration-slow: 320ms;
   --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --easing-spring: cubic-bezier(0.25, 0.8, 0.25, 1);
 }

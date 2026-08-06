@@ -1,7 +1,8 @@
+
 .home-page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
 
 .home-header {
@@ -9,21 +10,23 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: var(--space-3);
+  padding: var(--space-2) var(--space-1) 0;
 }
 
 .home-eyebrow {
   display: block;
   color: var(--color-brand-text);
-  font-size: 24rpx;
-  font-weight: 700;
+  font-size: var(--font-footnote);
+  font-weight: 600;
 }
 
 .home-title {
   display: block;
   margin-top: var(--space-1);
-  font-size: 42rpx;
-  font-weight: 800;
-  line-height: 1.2;
+  font-size: var(--font-large-title);
+  font-weight: 700;
+  letter-spacing: -1rpx;
+  line-height: 1.15;
 }
 
 .home-count {
@@ -33,14 +36,14 @@
 }
 
 .home-count__value {
-  color: var(--color-brand-text);
-  font-size: 34rpx;
-  font-weight: 800;
+  color: var(--color-text);
+  font-size: var(--font-title-3);
+  font-weight: 700;
 }
 
 .home-count__label {
   color: var(--color-muted);
-  font-size: 22rpx;
+  font-size: var(--font-caption);
 }
 
 .home-search {
@@ -49,12 +52,15 @@
   min-height: var(--touch-min);
   padding-left: var(--space-3);
   overflow: hidden;
+  border-radius: var(--radius-control);
+  background: var(--color-surface-subtle);
+  box-shadow: none;
 }
 
 .home-search__input {
   flex: 1;
   height: var(--touch-min);
-  font-size: 28rpx;
+  font-size: var(--font-body);
 }
 
 .home-search__button {
@@ -62,7 +68,7 @@
   height: var(--touch-min);
   color: var(--color-brand-text);
   font-size: 26rpx;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .home-categories {
@@ -96,7 +102,7 @@
 .product-card__image,
 .product-card__placeholder {
   width: 100%;
-  height: 276rpx;
+  height: 284rpx;
 }
 
 .product-card__placeholder {
@@ -118,7 +124,7 @@
   display: -webkit-box;
   overflow: hidden;
   font-size: 27rpx;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.4;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -127,7 +133,7 @@
 .product-card__meta {
   margin-top: var(--space-1);
   color: var(--color-muted);
-  font-size: 22rpx;
+  font-size: var(--font-caption);
   line-height: 1.4;
 }
 
@@ -140,9 +146,9 @@
 }
 
 .product-card__price {
-  color: var(--color-brand-text);
-  font-size: 32rpx;
-  font-weight: 800;
+  color: var(--color-text);
+  font-size: 34rpx;
+  font-weight: 700;
 }
 
 .product-card__favorite {
@@ -151,8 +157,8 @@
   border-top: 1rpx solid var(--color-border);
   border-radius: 0;
   color: var(--color-text-secondary);
-  font-size: 24rpx;
-  font-weight: 700;
+  font-size: var(--font-footnote);
+  font-weight: 600;
 }
 
 .product-card__favorite--active {
