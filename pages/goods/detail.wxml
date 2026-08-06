@@ -1,26 +1,29 @@
+
 <view class="page detail-page">
-  <view wx:if="{{state === 'ready'}}">
+  <view wx:if="{{state === 'ready'}}" class="detail-ready">
     <view class="detail-gallery surface-card">
       <image wx:if="{{item.images[0].src}}" class="detail-gallery__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
       <view wx:else class="detail-gallery__placeholder">{{item.images[0].emoji}}</view>
     </view>
 
     <view class="detail-summary surface-card">
+      <text class="detail-eyebrow">校内闲置 · {{item.condition}}</text>
       <view class="detail-summary__top">
         <text class="detail-price money">¥{{item.price}}</text>
         <text class="status-chip">{{statusLabel}}</text>
       </view>
       <text class="detail-title">{{item.title}}</text>
-      <text class="detail-meta">{{item.condition}} · 原价 ¥{{item.original_price}}</text>
+      <text class="detail-meta">原价 ¥{{item.original_price}} · {{item.campus_location}}</text>
       <text class="detail-description">{{item.description}}</text>
     </view>
 
     <view
-      class="seller-row surface-card pressable"
+      class="seller-row inset-group pressable"
       hover-class="pressable--active"
       bindtap="openSeller"
       aria-label="查看卖家资料"
-     role="button">
+      role="button"
+    >
       <view class="seller-row__avatar">{{seller ? seller.avatar_text : '卖'}}</view>
       <view class="seller-row__copy">
         <text class="seller-row__name">{{seller ? seller.name : '卖家资料'}}</text>
@@ -31,42 +34,52 @@
 
     <view
       wx:if="{{item.status !== 'on_sale'}}"
-      class="availability-banner availability-banner--{{availability.tone}}"
+      class="feedback-banner availability-banner--{{availability.tone}}"
       role="status"
     >
-      <text class="availability-banner__title">{{availability.title}}</text>
-      <text class="availability-banner__description">{{availability.description}}</text>
+      <text class="feedback-banner__title">{{availability.title}}</text>
+      <text class="feedback-banner__description">{{availability.description}}</text>
     </view>
 
-    <view class="meetup-card surface-card">
-      <text class="meetup-card__label">建议面交地点</text>
-      <text class="meetup-card__value">{{item.campus_location}}</text>
-      <text class="meetup-card__helper">请在公共区域当面检查商品，当前核销仅为本地 Demo。</text>
+    <view class="meetup-card inset-group">
+      <view class="meetup-card__row">
+        <view class="meetup-card__copy">
+          <text class="meetup-card__label">建议面交地点</text>
+          <text class="meetup-card__value">{{item.campus_location}}</text>
+        </view>
+        <text class="status-chip">校内面交</text>
+      </view>
+      <text class="meetup-card__helper">请在公共区域当面检查商品。当前支付与核销仅用于本地 Demo。</text>
     </view>
 
-    <view class="detail-actions">
+    <view class="detail-bottom-spacer"></view>
+
+    <view class="bottom-action-bar detail-actions">
       <button
-        class="button-base button-secondary pressable"
+        class="button-base button-secondary pressable detail-actions__secondary"
         hover-class="pressable--active"
         bindtap="toggleFavorite"
-      >{{favorited ? '取消收藏' : '收藏商品'}}</button>
+        aria-label="{{favorited ? '取消收藏商品' : '收藏商品'}}"
+      >{{favorited ? '已收藏' : '收藏'}}</button>
       <button
-        class="button-base button-secondary pressable"
+        class="button-base button-secondary pressable detail-actions__secondary"
         hover-class="pressable--active"
         bindtap="chatSeller"
-      >联系卖家</button>
+        aria-label="联系卖家"
+      >联系</button>
       <button
-        class="button-base button-primary pressable"
+        class="button-base button-primary pressable detail-actions__primary"
         hover-class="pressable--active"
         bindtap="makeOffer"
         disabled="{{item.status !== 'on_sale'}}"
+        aria-label="{{availability.primaryActionLabel}}"
       >{{availability.primaryActionLabel}}</button>
     </view>
   </view>
 
   <view wx:elif="{{state === 'not-found'}}" class="state-panel">
     <text class="state-panel__title">商品不存在</text>
-    <text class="state-panel__description">无效商品链接不会再回退到列表第一条数据。</text>
+    <text class="state-panel__description">链接可能已失效，且不会回退到其他商品。</text>
     <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 </view>

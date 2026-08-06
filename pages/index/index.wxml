@@ -23,6 +23,7 @@
       class="home-search__button button-ghost pressable"
       hover-class="pressable--active"
       bindtap="openFilter"
+      aria-label="打开筛选选项"
     >筛选</button>
   </view>
 
@@ -34,7 +35,9 @@
           hover-class="pressable--active"
           data-name="{{item.name}}"
           bindtap="selectCategory"
-         role="button">{{item.label}}</view>
+          aria-label="筛选分类 {{item.label}}"
+          role="button"
+        >{{item.label}}</view>
       </block>
     </view>
   </scroll-view>

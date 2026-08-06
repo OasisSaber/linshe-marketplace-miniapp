@@ -73,3 +73,18 @@ test("payment failure compensates by cancelling the created order", () => {
   });
   assert.equal(recoveredOrder.trade_status, "cancelled");
 });
+
+
+test("checkout orchestration cannot bypass the order price ceiling", () => {
+  const beforeOrders = ordersData.getOrders().length;
+
+  const result = createAndPayDemoOrder({
+    item_id: "item_001",
+    deal_price: 999
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.error.code, "ORDER_PRICE_ABOVE_LIST");
+  assert.equal(ordersData.getOrders().length, beforeOrders);
+  assert.equal(itemsData.getItemById("item_001").status, "on_sale");
+});

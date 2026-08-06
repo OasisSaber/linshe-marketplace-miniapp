@@ -1,6 +1,13 @@
+
 <view class="page checkout-page">
-  <view wx:if="{{state === 'ready'}}">
-    <view class="checkout-item surface-card">
+  <view wx:if="{{state === 'ready'}}" class="checkout-ready">
+    <view class="checkout-heading">
+      <text class="checkout-heading__eyebrow">确认交易信息</text>
+      <text class="checkout-heading__title">安全面交</text>
+      <text class="checkout-heading__description">付款前请核对商品、金额与面交地点。</text>
+    </view>
+
+    <view class="checkout-item inset-group">
       <image wx:if="{{item.images[0].src}}" class="checkout-item__image image-outline" src="{{item.images[0].src}}" mode="aspectFill" />
       <view wx:else class="checkout-item__placeholder">{{item.images[0].emoji}}</view>
       <view class="checkout-item__copy">
@@ -9,40 +16,67 @@
       </view>
     </view>
 
-    <view class="checkout-section surface-card">
-      <text class="checkout-section__title">费用明细</text>
-      <view class="fee-row">
-        <text>商品成交价</text>
-        <text class="money">¥{{dealPrice}}</text>
-      </view>
-      <view class="fee-row">
-        <text>平台担保费</text>
-        <text class="money">¥{{guaranteeFee}}</text>
-      </view>
-      <view class="fee-row fee-row--discount">
-        <text>校园面交优惠</text>
-        <text class="money">-¥{{discountAmount}}</text>
-      </view>
-      <view class="fee-row fee-row--total">
-        <text>合计</text>
-        <text class="money">¥{{total}}</text>
+    <view>
+      <text class="section-label">费用明细</text>
+      <view class="checkout-section inset-group">
+        <view class="fee-row">
+          <text>商品成交价</text>
+          <text class="money">¥{{dealPrice}}</text>
+        </view>
+        <view class="fee-row">
+          <text>平台担保费</text>
+          <text class="money">¥{{guaranteeFee}}</text>
+        </view>
+        <view class="fee-row fee-row--discount">
+          <text>校园面交优惠</text>
+          <text class="money">-¥{{discountAmount}}</text>
+        </view>
+        <view class="fee-row fee-row--total">
+          <text>合计</text>
+          <text class="money">¥{{total}}</text>
+        </view>
       </view>
     </view>
 
-    <view class="checkout-section surface-card">
-      <text class="checkout-section__title">面交地点</text>
-      <text class="checkout-location">{{meetupLocation}}</text>
-      <text class="checkout-helper">建议在公共区域完成验货和本地 Demo 核销。</text>
+    <view>
+      <text class="section-label">面交信息</text>
+      <view class="checkout-section inset-group">
+        <view class="checkout-location-row">
+          <view>
+            <text class="checkout-location-label">面交地点</text>
+            <text class="checkout-location">{{meetupLocation}}</text>
+          </view>
+          <text class="status-chip">公共区域</text>
+        </view>
+        <text class="checkout-helper">建议当面验货后再完成本地 Demo 核销。</text>
+      </view>
     </view>
 
-    <text wx:if="{{errorMessage}}" class="checkout-error" role="alert">{{errorMessage}}</text>
+    <view class="feedback-banner feedback-banner--info">
+      <text class="feedback-banner__title">演示说明</text>
+      <text class="feedback-banner__description">本页面不产生真实资金流。接入真实支付时必须由服务端重新计算金额并校验身份。</text>
+    </view>
 
-    <button
-      class="button-base button-primary pressable checkout-submit"
-      hover-class="pressable--active"
-      disabled="{{submitting}}"
-      bindtap="pay"
-    >{{submitting ? '正在处理订单…' : '确认 Demo 支付'}}</button>
+    <view wx:if="{{errorMessage}}" class="feedback-banner feedback-banner--danger" role="alert">
+      <text class="feedback-banner__title">订单未完成</text>
+      <text class="feedback-banner__description">{{errorMessage}}</text>
+    </view>
+
+    <view class="checkout-bottom-spacer"></view>
+
+    <view class="bottom-action-bar checkout-submit-bar">
+      <view class="checkout-submit-bar__total">
+        <text class="checkout-submit-bar__label">合计</text>
+        <text class="checkout-submit-bar__amount money">¥{{total}}</text>
+      </view>
+      <button
+        class="button-base button-primary pressable checkout-submit"
+        hover-class="pressable--active"
+        disabled="{{submitting}}"
+        bindtap="pay"
+        aria-label="确认 Demo 支付，合计 {{total}} 元"
+      >{{submitting ? '正在处理…' : '确认支付'}}</button>
+    </view>
   </view>
 
   <view wx:elif="{{state === 'unavailable'}}" class="state-panel">
@@ -51,7 +85,6 @@
     <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 
-
   <view wx:elif="{{state === 'invalid-offer'}}" class="state-panel">
     <text class="state-panel__title">出价信息无效</text>
     <text class="state-panel__description">{{errorMessage}}。请返回商品页重新出价。</text>
@@ -59,8 +92,8 @@
   </view>
 
   <view wx:elif="{{state === 'error'}}" class="state-panel">
-    <text class="state-panel__title">结算出错了</text>
-    <text class="state-panel__description">{{errorMessage}}。请返回商品页重新出价。</text>
+    <text class="state-panel__title">结算暂不可用</text>
+    <text class="state-panel__description">{{errorMessage}}。请返回商品页后重试。</text>
     <button class="button-base button-secondary pressable" hover-class="pressable--active" bindtap="goBack">返回上一页</button>
   </view>
 

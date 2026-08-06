@@ -1,7 +1,8 @@
+
 .publish-page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-6);
 }
 
 .verification-banner {
@@ -10,6 +11,7 @@
   justify-content: space-between;
   gap: var(--space-3);
   padding: var(--space-4);
+  border-color: var(--color-warning-border);
   background: var(--color-warning-soft);
 }
 
@@ -26,8 +28,8 @@
 .verification-banner__title,
 .image-placeholder__title,
 .setting-row__title {
-  font-size: 28rpx;
-  font-weight: 800;
+  font-size: var(--font-body);
+  font-weight: 700;
   line-height: 1.35;
 }
 
@@ -35,7 +37,7 @@
 .image-placeholder__description,
 .setting-row__description {
   color: var(--color-muted);
-  font-size: 24rpx;
+  font-size: var(--font-footnote);
   line-height: 1.45;
 }
 
@@ -48,19 +50,21 @@
 .image-placeholder {
   display: flex;
   align-items: center;
-  min-height: 152rpx;
+  min-height: 176rpx;
   padding: var(--space-4);
   gap: var(--space-3);
   border-style: dashed;
+  border-color: var(--color-border-strong);
+  box-shadow: none;
 }
 
 .image-placeholder__mark {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 72rpx;
-  height: 72rpx;
-  border-radius: var(--radius-sm);
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: var(--radius-control);
   color: var(--color-brand-text);
   background: var(--color-brand-soft);
   font-size: 40rpx;
@@ -75,15 +79,15 @@
 
 .price-control__prefix {
   color: var(--color-text);
-  font-size: 32rpx;
-  font-weight: 800;
+  font-size: var(--font-title-3);
+  font-weight: 700;
 }
 
 .price-control__input {
   flex: 1;
-  min-height: var(--touch-min);
-  font-size: 36rpx;
-  font-weight: 800;
+  min-height: var(--control-large);
+  font-size: var(--font-title-2);
+  font-weight: 700;
 }
 
 .setting-row,
@@ -98,30 +102,32 @@
 
 .location-row__label {
   color: var(--color-muted);
-  font-size: 24rpx;
+  font-size: var(--font-footnote);
 }
 
 .location-row__value {
   color: var(--color-text);
-  font-size: 28rpx;
-  font-weight: 700;
+  font-size: var(--font-body);
+  font-weight: 600;
 }
 
 .location-row__action {
   color: var(--color-brand-text);
   font-size: 26rpx;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .form-error {
-  padding: var(--space-3);
-  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  border: 1rpx solid var(--color-danger-border);
+  border-radius: var(--radius-card);
   color: var(--color-danger);
   background: var(--color-danger-soft);
-  font-size: 26rpx;
+  font-size: var(--font-body);
   line-height: 1.45;
 }
 
 .submit-button {
   width: 100%;
+  min-height: var(--control-large);
 }
