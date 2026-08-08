@@ -29,7 +29,7 @@ function getCheckoutQuote(itemId, rawOfferPrice, options) {
   const offerPrice = hasOffer ? Number(rawOfferPrice) : item.price;
 
   if (!Number.isFinite(offerPrice) || offerPrice <= 0 || offerPrice > item.price) {
-    return failure("OFFER_PRICE_INVALID", "出价必须大于 0 且不能高于商品标价", {
+    return failure("OFFER_PRICE_INVALID", "出价至少为 0.01 且不能高于商品标价", {
       itemId,
       offerPrice: rawOfferPrice,
       listPrice: item.price
@@ -37,6 +37,13 @@ function getCheckoutQuote(itemId, rawOfferPrice, options) {
   }
 
   const dealPrice = roundMoney(offerPrice);
+  if (dealPrice <= 0) {
+    return failure("OFFER_PRICE_INVALID", "出价至少为 0.01", {
+      itemId,
+      offerPrice: rawOfferPrice,
+      listPrice: item.price
+    });
+  }
   const guaranteeFee = roundMoney(config.guaranteeFee == null ? 2 : config.guaranteeFee);
   const discountAmount = roundMoney(config.discountAmount == null ? 2 : config.discountAmount);
   const total = roundMoney(dealPrice + guaranteeFee - discountAmount);

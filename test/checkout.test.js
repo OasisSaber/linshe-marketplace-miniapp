@@ -88,3 +88,14 @@ test("checkout orchestration cannot bypass the order price ceiling", () => {
   assert.equal(ordersData.getOrders().length, beforeOrders);
   assert.equal(itemsData.getItemById("item_001").status, "on_sale");
 });
+
+
+test("checkout rejects a positive offer that rounds to zero", () => {
+  const result = getCheckoutQuote("item_001", 0.001, {
+    guaranteeFee: 0,
+    discountAmount: 0
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.error.code, "OFFER_PRICE_INVALID");
+});

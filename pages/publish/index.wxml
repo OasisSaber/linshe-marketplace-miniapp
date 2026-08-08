@@ -32,6 +32,7 @@
         maxlength="30"
         bindinput="updateField"
         placeholder="5–30 字，写清品牌、型号和物品"
+        placeholder-class="form-placeholder"
         aria-label="商品标题"
       />
       <text wx:if="{{errorField === 'title'}}" class="field__error">{{errorMessage}}</text>
@@ -47,6 +48,7 @@
         maxlength="300"
         bindinput="updateField"
         placeholder="至少 10 字，说明成色、使用情况和配件"
+        placeholder-class="form-placeholder"
         aria-label="商品描述"
       />
       <text wx:if="{{errorField === 'description'}}" class="field__error">{{errorMessage}}</text>
@@ -63,6 +65,7 @@
           type="digit"
           bindinput="updateField"
           placeholder="0.00"
+          placeholder-class="form-placeholder"
           aria-label="商品价格"
         />
       </view>

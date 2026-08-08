@@ -82,7 +82,6 @@ button view {
   line-height: 1;
 }
 
-input::placeholder,
-textarea::placeholder {
+.form-placeholder {
   color: var(--color-placeholder);
 }

@@ -50,6 +50,11 @@ function createDemoOrder(payload) {
   if (!Number.isFinite(rawDealPrice) || rawDealPrice <= 0) {
     return failure("ORDER_PRICE_INVALID", "成交价必须是有效正数");
   }
+
+  const dealPrice = roundMoney(rawDealPrice);
+  if (dealPrice <= 0) {
+    return failure("ORDER_PRICE_INVALID", "成交价至少为 0.01");
+  }
   if (rawDealPrice > item.price) {
     return failure(
       "ORDER_PRICE_ABOVE_LIST",
@@ -66,7 +71,6 @@ function createDemoOrder(payload) {
     return failure("ORDER_FEE_INVALID", "订单费用必须是有效非负数");
   }
 
-  const dealPrice = roundMoney(rawDealPrice);
   const guaranteeFee = roundMoney(rawGuaranteeFee);
   const discountAmount = roundMoney(rawDiscountAmount);
   const totalAmount = roundMoney(dealPrice + guaranteeFee - discountAmount);

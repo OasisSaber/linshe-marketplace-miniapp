@@ -6,7 +6,7 @@
     </view>
     <view class="search">
       <text>⌕</text>
-      <input value="{{keyword}}" bindinput="onSearchInput" placeholder="搜索同学、商品或消息" />
+      <input value="{{keyword}}" bindinput="onSearchInput" placeholder="搜索同学、商品或消息" placeholder-class="form-placeholder" />
     </view>
   </view>
 

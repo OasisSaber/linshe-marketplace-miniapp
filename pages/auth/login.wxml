@@ -35,10 +35,10 @@
       <view class="form-card">
         <view class="field">
           <label>校园邮箱</label>
-          <view class="input-row">✉ <input value="{{email}}" bindinput="onEmailInput" placeholder="请输入 edu.cn 校园邮箱" /></view>
+          <view class="input-row">✉ <input value="{{email}}" bindinput="onEmailInput" placeholder="请输入 edu.cn 校园邮箱" placeholder-class="form-placeholder" /></view>
         </view>
         <view class="code-row">
-          <input value="{{code}}" bindinput="onCodeInput" placeholder="输入6位验证码" />
+          <input value="{{code}}" bindinput="onCodeInput" placeholder="输入6位验证码" placeholder-class="form-placeholder" />
           <button bindtap="sendCode">发送验证码</button>
         </view>
       </view>
