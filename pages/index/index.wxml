@@ -16,6 +16,7 @@
       value="{{keyword}}"
       bindinput="onSearchInput"
       placeholder="搜索商品标题或校内地点"
+      placeholder-class="form-placeholder"
       confirm-type="search"
       aria-label="搜索商品"
     />

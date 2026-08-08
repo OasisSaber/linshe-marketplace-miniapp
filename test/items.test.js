@@ -66,3 +66,18 @@ test("rejects unknown seller IDs", () => {
   assert.equal(result.ok, false);
   assert.equal(result.error.code, "SELLER_NOT_FOUND");
 });
+
+
+test("rejects a positive item price that rounds to zero", () => {
+  const result = items.createDemoItem({
+    title: "测试商品标题五个字",
+    description: "这是一个至少十个字的商品描述内容",
+    price: 0.001,
+    category: "教材课本",
+    condition: "良好",
+    campus_location: "图书馆南门"
+  }, "seller_001");
+
+  assert.equal(result.ok, false);
+  assert.equal(result.error.code, "ITEM_PRICE_INVALID");
+});

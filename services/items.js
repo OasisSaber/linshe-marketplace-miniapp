@@ -75,11 +75,16 @@ function validateItemPayload(payload) {
   if (description.length < 10) {
     return invalid("ITEM_DESCRIPTION_INVALID", "商品描述至少需要 10 字", "description");
   }
-  if (!Number.isFinite(price) || price <= 0 || price > 999999) {
-    return invalid("ITEM_PRICE_INVALID", "价格必须大于 0 且不超过 999999", "price");
+  const normalizedPrice = Number.isFinite(price) ? roundMoney(price) : NaN;
+  const normalizedOriginalPrice = Number.isFinite(originalPrice)
+    ? roundMoney(originalPrice)
+    : NaN;
+
+  if (!Number.isFinite(price) || price <= 0 || price > 999999 || normalizedPrice <= 0) {
+    return invalid("ITEM_PRICE_INVALID", "价格至少为 0.01 且不超过 999999", "price");
   }
-  if (!Number.isFinite(originalPrice) || originalPrice <= 0) {
-    return invalid("ITEM_ORIGINAL_PRICE_INVALID", "原价必须是有效正数", "original_price");
+  if (!Number.isFinite(originalPrice) || originalPrice <= 0 || normalizedOriginalPrice <= 0) {
+    return invalid("ITEM_ORIGINAL_PRICE_INVALID", "原价至少为 0.01", "original_price");
   }
   if (!category) {
     return invalid("ITEM_CATEGORY_INVALID", "请选择有效商品分类", "category");
@@ -94,8 +99,8 @@ function validateItemPayload(payload) {
   return success({
     title,
     description,
-    price: roundMoney(price),
-    original_price: roundMoney(originalPrice),
+    price: normalizedPrice,
+    original_price: normalizedOriginalPrice,
     category,
     condition,
     campus_location: campusLocation,
