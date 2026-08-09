@@ -11,7 +11,8 @@ Page({
     seller: null,
     favorited: false,
     statusLabel: "",
-    availability: null
+    availability: null,
+    favoriteBusy: false
   },
 
   onLoad(options) {
@@ -44,12 +45,19 @@ Page({
   toggleFavorite() {
     if (!this.data.item) return;
 
+    // 防快速连点：300ms 窗口内忽略重复点击（同步服务下锁需保持到窗口结束）
+    const now = Date.now();
+    if (now - (this.lastFavoriteTapAt || 0) < 300) return;
+    this.lastFavoriteTapAt = now;
+
+    this.setData({ favoriteBusy: true });
     const result = toggleFavorite(this.data.item.item_id);
     if (!result.ok) {
+      this.setData({ favoriteBusy: false });
       wx.showToast({ title: result.error.message, icon: "none" });
       return;
     }
-    this.setData({ favorited: result.data.favorite });
+    this.setData({ favorited: result.data.favorite, favoriteBusy: false });
     wx.showToast({
       title: result.data.favorite ? "已收藏" : "已取消收藏",
       icon: "none"
