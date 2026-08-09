@@ -37,6 +37,7 @@ Page({
     activeCategory: "全部",
     feedCount: 0,
     loading: false,
+    favoriteBusy: false,
     items: []
   },
 
@@ -74,12 +75,22 @@ Page({
 
   toggleFavorite(event) {
     const itemId = event.currentTarget.dataset.id;
+    if (!itemId) return;
+
+    // 防快速连点：300ms 窗口内忽略重复点击（同步服务下锁需保持到窗口结束）
+    const now = Date.now();
+    if (now - (this.lastFavoriteTapAt || 0) < 300) return;
+    this.lastFavoriteTapAt = now;
+
+    this.setData({ favoriteBusy: true });
     const result = toggleFavorite(itemId);
     if (!result.ok) {
+      this.setData({ favoriteBusy: false });
       wx.showToast({ title: result.error.message, icon: "none" });
       return;
     }
     this.refreshItems();
+    this.setData({ favoriteBusy: false });
     wx.showToast({
       title: result.data.favorite ? "已收藏" : "已取消收藏",
       icon: "none"
