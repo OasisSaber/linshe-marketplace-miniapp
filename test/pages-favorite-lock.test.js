@@ -80,8 +80,41 @@ test("index page ignores rapid repeated taps within the debounce window", () => 
   page.toggleFavorite(event); // 300ms 窗口内的快速连点应被忽略
 
   assert.equal(favorites.isFavorite(firstItemId), true); // 只翻转一次
-  assert.equal(page.data.favoriteBusy, false); // busy 标志已复位
   assert.equal(toastCount, 1);
+});
+
+test("index page allows rapid favorite taps on different items", () => {
+  const page = createPageFrom(indexDefinition);
+  page.onLoad();
+
+  const firstItemId = page.data.items[0].item_id;
+  const secondItemId = page.data.items[1].item_id;
+
+  page.toggleFavorite({
+    currentTarget: { dataset: { id: firstItemId } }
+  });
+
+  page.toggleFavorite({
+    currentTarget: { dataset: { id: secondItemId } }
+  }); // 不同商品互不阻塞
+
+  assert.equal(favorites.isFavorite(firstItemId), true);
+  assert.equal(favorites.isFavorite(secondItemId), true);
+  assert.equal(toastCount, 2);
+});
+
+test("index page allows the next tap on the same item after the debounce window", () => {
+  const page = createPageFrom(indexDefinition);
+  page.onLoad();
+  const firstItemId = page.data.items[0].item_id;
+  const event = { currentTarget: { dataset: { id: firstItemId } } };
+
+  page.toggleFavorite(event);
+  page.favoriteTapAtById = { [firstItemId]: Date.now() - 500 }; // 模拟已过防连点窗口
+  page.toggleFavorite(event);
+
+  assert.equal(favorites.isFavorite(firstItemId), false); // 第二次点击生效并取消收藏
+  assert.equal(toastCount, 2);
 });
 
 test("index page ignores taps without a valid item id", () => {

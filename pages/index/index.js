@@ -37,7 +37,6 @@ Page({
     activeCategory: "全部",
     feedCount: 0,
     loading: false,
-    favoriteBusy: false,
     items: []
   },
 
@@ -77,20 +76,22 @@ Page({
     const itemId = event.currentTarget.dataset.id;
     if (!itemId) return;
 
-    // 防快速连点：300ms 窗口内忽略重复点击（同步服务下锁需保持到窗口结束）
-    const now = Date.now();
-    if (now - (this.lastFavoriteTapAt || 0) < 300) return;
-    this.lastFavoriteTapAt = now;
+    // 防快速连点：按商品隔离的 300ms 窗口，同一商品快速双击只执行一次，
+    // 不同商品之间互不干扰（收藏服务为同步调用，无需 busy 状态）。
+    // Object.create(null) 避免 __proto__/constructor 键经原型链绕过窗口。
+    this.favoriteTapAtById = this.favoriteTapAtById || Object.create(null);
 
-    this.setData({ favoriteBusy: true });
+    const now = Date.now();
+    const lastTapAt = this.favoriteTapAtById[itemId] || 0;
+    if (now - lastTapAt < 300) return;
+    this.favoriteTapAtById[itemId] = now;
+
     const result = toggleFavorite(itemId);
     if (!result.ok) {
-      this.setData({ favoriteBusy: false });
       wx.showToast({ title: result.error.message, icon: "none" });
       return;
     }
     this.refreshItems();
-    this.setData({ favoriteBusy: false });
     wx.showToast({
       title: result.data.favorite ? "已收藏" : "已取消收藏",
       icon: "none"
