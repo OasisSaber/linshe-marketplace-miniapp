@@ -1,3 +1,4 @@
+
 .order-page > view {
   display: flex;
   flex-direction: column;
@@ -20,13 +21,13 @@
 .order-status__label,
 .order-status__id {
   color: var(--color-muted);
-  font-size: 23rpx;
+  font-size: var(--font-footnote);
 }
 
 .order-status__value {
-  color: var(--color-brand-text);
-  font-size: 36rpx;
-  font-weight: 800;
+  color: var(--color-text);
+  font-size: var(--font-title-1);
+  font-weight: 700;
 }
 
 .order-item {
@@ -58,34 +59,34 @@
 }
 
 .order-item__title {
-  font-size: 28rpx;
-  font-weight: 800;
+  font-size: var(--font-body);
+  font-weight: 700;
 }
 
 .order-item__price {
-  color: var(--color-brand-text);
-  font-size: 28rpx;
-  font-weight: 800;
+  color: var(--color-text);
+  font-size: var(--font-body);
+  font-weight: 700;
 }
 
 .order-item__location {
   color: var(--color-muted);
-  font-size: 24rpx;
+  font-size: var(--font-footnote);
 }
 
 .timeline__title,
 .snapshot__title {
   display: block;
   margin-bottom: var(--space-3);
-  font-size: 30rpx;
-  font-weight: 800;
+  font-size: var(--font-headline);
+  font-weight: 700;
 }
 
 .timeline-row {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  min-height: 64rpx;
+  gap: var(--space-3);
+  min-height: 72rpx;
 }
 
 .timeline-row__mark {
@@ -106,32 +107,35 @@
 }
 
 .timeline-row__title {
-  font-size: 26rpx;
+  font-size: var(--font-body);
 }
 
 .snapshot-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64rpx;
+  min-height: 80rpx;
   color: var(--color-text-secondary);
-  font-size: 26rpx;
+  font-size: var(--font-body);
+}
+
+.snapshot-row + .snapshot-row {
+  border-top: 1rpx solid var(--color-border);
 }
 
 .snapshot-row--total {
-  margin-top: var(--space-2);
-  padding-top: var(--space-3);
-  border-top: 1rpx solid var(--color-border);
   color: var(--color-text);
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .order-error {
-  padding: var(--space-3);
-  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  border: 1rpx solid var(--color-danger-border);
+  border-radius: var(--radius-card);
   color: var(--color-danger);
   background: var(--color-danger-soft);
-  font-size: 26rpx;
+  font-size: var(--font-body);
+  line-height: 1.45;
 }
 
 .order-actions {

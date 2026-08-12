@@ -5,10 +5,11 @@
       value="{{keyword}}"
       bindinput="updateKeyword"
       placeholder="搜索商品标题或校内地点"
+      placeholder-class="form-placeholder"
       confirm-type="search"
       aria-label="搜索商品"
     />
-    <button class="search-control__clear button-ghost pressable" hover-class="pressable--active" bindtap="clearFilters">清除</button>
+    <button class="search-control__clear button-ghost pressable" hover-class="pressable--active" bindtap="clearFilters" aria-label="清除所有筛选">清除</button>
   </view>
 
   <scroll-view class="category-scroll" scroll-x enhanced show-scrollbar="{{false}}">
@@ -19,7 +20,9 @@
           hover-class="pressable--active"
           data-value="{{item}}"
           bindtap="selectCategory"
-         role="button">{{item}}</view>
+          aria-label="筛选分类 {{item}}"
+          role="button"
+        >{{item}}</view>
       </block>
     </view>
   </scroll-view>
@@ -32,7 +35,9 @@
           hover-class="pressable--active"
           data-value="{{item.value}}"
           bindtap="selectSort"
-         role="button">{{item.label}}</view>
+          aria-label="排序方式 {{item.label}}"
+          role="button"
+        >{{item.label}}</view>
       </block>
     </view>
 

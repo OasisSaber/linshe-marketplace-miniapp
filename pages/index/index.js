@@ -74,6 +74,18 @@ Page({
 
   toggleFavorite(event) {
     const itemId = event.currentTarget.dataset.id;
+    if (!itemId) return;
+
+    // 防快速连点：按商品隔离的 300ms 窗口，同一商品快速双击只执行一次，
+    // 不同商品之间互不干扰（收藏服务为同步调用，无需 busy 状态）。
+    // Object.create(null) 避免 __proto__/constructor 键经原型链绕过窗口。
+    this.favoriteTapAtById = this.favoriteTapAtById || Object.create(null);
+
+    const now = Date.now();
+    const lastTapAt = this.favoriteTapAtById[itemId] || 0;
+    if (now - lastTapAt < 300) return;
+    this.favoriteTapAtById[itemId] = now;
+
     const result = toggleFavorite(itemId);
     if (!result.ok) {
       wx.showToast({ title: result.error.message, icon: "none" });

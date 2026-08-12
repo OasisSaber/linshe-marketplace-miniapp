@@ -53,6 +53,7 @@
         hover-class="pressable--active"
         disabled="{{submitting}}"
         bindtap="complete"
+        aria-label="确认完成面交"
       >确认完成面交</button>
       <button
         wx:if="{{order.trade_status === 'wait_pay' || order.trade_status === 'wait_meetup'}}"
@@ -60,6 +61,7 @@
         hover-class="pressable--active"
         disabled="{{submitting}}"
         bindtap="cancel"
+        aria-label="取消订单"
       >取消订单</button>
     </view>
   </view>

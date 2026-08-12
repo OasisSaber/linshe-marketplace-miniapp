@@ -1,3 +1,4 @@
+
 .search-page {
   display: flex;
   flex-direction: column;
@@ -10,12 +11,15 @@
   min-height: var(--touch-min);
   padding-left: var(--space-3);
   overflow: hidden;
+  border-radius: var(--radius-control);
+  background: var(--color-surface-subtle);
+  box-shadow: none;
 }
 
 .search-control__input {
   flex: 1;
   height: var(--touch-min);
-  font-size: 28rpx;
+  font-size: var(--font-body);
 }
 
 .search-control__clear {
@@ -23,7 +27,7 @@
   height: var(--touch-min);
   color: var(--color-brand-text);
   font-size: 26rpx;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .category-scroll {
@@ -45,6 +49,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-2);
+  padding: 6rpx;
+  border-radius: var(--radius-control);
+  background: var(--color-surface-subtle);
 }
 
 .sort-option {
@@ -52,15 +59,16 @@
   align-items: center;
   justify-content: center;
   min-height: var(--touch-min);
-  border-radius: var(--radius-sm);
+  border-radius: 16rpx;
   color: var(--color-text-secondary);
   font-size: 25rpx;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .sort-option--active {
-  color: var(--color-brand-text);
-  background: var(--color-brand-soft);
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-float);
 }
 
 .meetup-toggle {
@@ -74,15 +82,15 @@
 
 .meetup-toggle__title {
   display: block;
-  font-size: 27rpx;
-  font-weight: 700;
+  font-size: var(--font-body);
+  font-weight: 600;
 }
 
 .meetup-toggle__description {
   display: block;
   margin-top: var(--space-1);
   color: var(--color-muted);
-  font-size: 23rpx;
+  font-size: var(--font-footnote);
 }
 
 .result-header {
@@ -92,13 +100,13 @@
 }
 
 .result-header__title {
-  font-size: 32rpx;
-  font-weight: 800;
+  font-size: var(--font-title-3);
+  font-weight: 700;
 }
 
 .result-header__count {
   color: var(--color-muted);
-  font-size: 24rpx;
+  font-size: var(--font-footnote);
 }
 
 .result-list {
@@ -140,8 +148,8 @@
   display: -webkit-box;
   overflow: hidden;
   color: var(--color-text);
-  font-size: 28rpx;
-  font-weight: 800;
+  font-size: var(--font-body);
+  font-weight: 700;
   line-height: 1.4;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -150,7 +158,7 @@
 .result-card__meta {
   margin-top: var(--space-1);
   color: var(--color-muted);
-  font-size: 23rpx;
+  font-size: var(--font-footnote);
   line-height: 1.45;
 }
 
@@ -163,7 +171,7 @@
 }
 
 .result-card__price {
-  color: var(--color-brand-text);
-  font-size: 34rpx;
-  font-weight: 800;
+  color: var(--color-text);
+  font-size: var(--font-title-3);
+  font-weight: 700;
 }
