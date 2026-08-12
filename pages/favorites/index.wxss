@@ -1,34 +1,47 @@
+
 .favorites-page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
 
 .favorites-header {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-1) 0;
+}
+
+.favorites-header__eyebrow {
+  color: var(--color-brand-text);
+  font-size: var(--font-footnote);
+  font-weight: 600;
+}
+
+.favorites-header__row {
+  display: flex;
+  align-items: baseline;
   justify-content: space-between;
   gap: var(--space-3);
 }
 
 .favorites-header__title {
-  display: block;
-  font-size: 40rpx;
-  font-weight: 800;
-  line-height: 1.25;
+  font-size: var(--font-large-title);
+  font-weight: 700;
+  letter-spacing: -1rpx;
+  line-height: 1.15;
 }
 
 .favorites-header__description {
-  display: block;
-  margin-top: var(--space-1);
   color: var(--color-muted);
-  font-size: 24rpx;
+  font-size: var(--font-body);
+  line-height: 1.45;
 }
 
 .favorites-header__count {
   color: var(--color-brand-text);
-  font-size: 26rpx;
-  font-weight: 800;
+  font-size: var(--font-body);
+  font-weight: 700;
 }
 
 .favorite-list {
@@ -50,8 +63,8 @@
 .favorite-card__image,
 .favorite-card__placeholder {
   flex: none;
-  width: 160rpx;
-  height: 160rpx;
+  width: 168rpx;
+  height: 168rpx;
   border-radius: var(--radius-sm);
 }
 
@@ -71,22 +84,27 @@
 }
 
 .favorite-card__title {
-  font-size: 28rpx;
-  font-weight: 800;
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: var(--font-body);
+  font-weight: 700;
   line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .favorite-card__meta {
   margin-top: var(--space-1);
   color: var(--color-muted);
-  font-size: 23rpx;
+  font-size: var(--font-footnote);
+  line-height: 1.4;
 }
 
 .favorite-card__price {
   margin-top: auto;
-  color: var(--color-brand-text);
-  font-size: 32rpx;
-  font-weight: 800;
+  color: var(--color-text);
+  font-size: var(--font-title-3);
+  font-weight: 700;
 }
 
 .favorite-card__remove {
@@ -94,6 +112,5 @@
   min-height: var(--touch-min);
   border-top: 1rpx solid var(--color-border);
   border-radius: 0;
-  color: var(--color-danger);
   font-size: 25rpx;
 }

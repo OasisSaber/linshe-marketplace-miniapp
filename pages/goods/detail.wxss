@@ -1,4 +1,5 @@
-.detail-page > view {
+
+.detail-ready {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -6,12 +7,13 @@
 
 .detail-gallery {
   overflow: hidden;
+  border-radius: var(--radius-large);
 }
 
 .detail-gallery__image,
 .detail-gallery__placeholder {
   width: 100%;
-  height: 600rpx;
+  height: 620rpx;
 }
 
 .detail-gallery__placeholder {
@@ -22,9 +24,17 @@
   font-size: 96rpx;
 }
 
-.detail-summary,
-.meetup-card {
+.detail-summary {
   padding: var(--space-4);
+}
+
+.detail-eyebrow {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-brand-text);
+  font-size: var(--font-footnote);
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .detail-summary__top {
@@ -35,31 +45,33 @@
 }
 
 .detail-price {
-  color: var(--color-brand-text);
-  font-size: 48rpx;
-  font-weight: 800;
+  color: var(--color-text);
+  font-size: 52rpx;
+  font-weight: 700;
+  letter-spacing: -1rpx;
 }
 
 .detail-title {
   display: block;
   margin-top: var(--space-2);
-  font-size: 36rpx;
-  font-weight: 800;
-  line-height: 1.35;
+  font-size: var(--font-title-2);
+  font-weight: 700;
+  line-height: 1.28;
 }
 
 .detail-meta {
   display: block;
   margin-top: var(--space-2);
   color: var(--color-muted);
-  font-size: 24rpx;
+  font-size: var(--font-footnote);
+  line-height: 1.4;
 }
 
 .detail-description {
   display: block;
   margin-top: var(--space-3);
   color: var(--color-text-secondary);
-  font-size: 27rpx;
+  font-size: var(--font-body);
   line-height: 1.65;
 }
 
@@ -80,11 +92,12 @@
   border-radius: 40rpx;
   color: var(--color-brand-text);
   background: var(--color-brand-soft);
-  font-size: 30rpx;
-  font-weight: 800;
+  font-size: var(--font-callout);
+  font-weight: 700;
 }
 
-.seller-row__copy {
+.seller-row__copy,
+.meetup-card__copy {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -93,47 +106,74 @@
 }
 
 .seller-row__name {
-  font-size: 28rpx;
-  font-weight: 800;
+  font-size: var(--font-body);
+  font-weight: 700;
 }
 
 .seller-row__meta,
 .meetup-card__helper {
   color: var(--color-muted);
-  font-size: 23rpx;
+  font-size: var(--font-footnote);
   line-height: 1.45;
 }
 
 .seller-row__action {
   color: var(--color-brand-text);
-  font-size: 25rpx;
-  font-weight: 700;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.availability-banner--warning {
+  border-color: var(--color-warning-border);
+  background: var(--color-warning-soft);
+}
+
+.availability-banner--neutral {
+  background: var(--color-surface-subtle);
+}
+
+.meetup-card {
+  padding: var(--space-4);
+}
+
+.meetup-card__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
 }
 
 .meetup-card__label {
-  display: block;
   color: var(--color-muted);
-  font-size: 23rpx;
+  font-size: var(--font-footnote);
 }
 
 .meetup-card__value {
-  display: block;
-  margin-top: var(--space-1);
-  font-size: 29rpx;
-  font-weight: 800;
+  color: var(--color-text);
+  font-size: var(--font-callout);
+  font-weight: 700;
 }
 
 .meetup-card__helper {
   display: block;
-  margin-top: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.detail-bottom-spacer {
+  height: 132rpx;
 }
 
 .detail-actions {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 104rpx 104rpx 1fr;
   gap: var(--space-2);
 }
 
-.detail-actions .button-primary {
-  grid-column: 1 / -1;
+.detail-actions__secondary,
+.detail-actions__primary {
+  width: 100%;
+}
+
+.detail-actions__secondary {
+  padding: 0 var(--space-1);
+  font-size: 25rpx;
 }

@@ -1,5 +1,5 @@
 const THEME = {
-  brandColor: "#1fa35a"
+  brandColor: "#30B565"
 };
 
 module.exports = {

@@ -107,3 +107,47 @@ test("money snapshot is rounded to two decimals", () => {
   assert.equal(created.data.deal_price, 20.11);
   assert.equal(created.data.total_amount, 20.21);
 });
+
+
+test("order service rejects a deal price above the item list price without mutation", () => {
+  const beforeOrders = ordersData.getOrders().length;
+  const beforeStatus = itemsData.getItemById("item_001").status;
+
+  const result = orders.createDemoOrder({
+    item_id: "item_001",
+    deal_price: 999
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.error.code, "ORDER_PRICE_ABOVE_LIST");
+  assert.equal(ordersData.getOrders().length, beforeOrders);
+  assert.equal(itemsData.getItemById("item_001").status, beforeStatus);
+});
+
+test("order service accepts a deal price equal to the item list price", () => {
+  const result = orders.createDemoOrder({
+    item_id: "item_001",
+    deal_price: 25
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.data.deal_price, 25);
+});
+
+
+test("order service rejects a positive deal price that rounds to zero", () => {
+  const beforeOrders = ordersData.getOrders().length;
+  const beforeStatus = itemsData.getItemById("item_001").status;
+
+  const result = orders.createDemoOrder({
+    item_id: "item_001",
+    deal_price: 0.001,
+    guarantee_fee: 0,
+    discount_amount: 0
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.error.code, "ORDER_PRICE_INVALID");
+  assert.equal(ordersData.getOrders().length, beforeOrders);
+  assert.equal(itemsData.getItemById("item_001").status, beforeStatus);
+});

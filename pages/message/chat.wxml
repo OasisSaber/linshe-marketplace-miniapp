@@ -33,6 +33,7 @@
         confirm-type="send"
         bindconfirm="sendMessage"
         placeholder="输入消息"
+        placeholder-class="form-placeholder"
         aria-label="输入聊天消息"
       />
       <button class="chat-composer__send button-primary pressable" hover-class="pressable--active" bindtap="sendMessage">发送</button>

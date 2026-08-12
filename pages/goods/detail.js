@@ -1,12 +1,8 @@
 const app = getApp();
-const { getItemById, ITEM_STATUS_LABELS } = require("../../services/items");
 const { getChatByItemId } = require("../../services/chats");
 const { requireVerified } = require("../../services/auth");
-const {
-  isFavorite,
-  toggleFavorite
-} = require("../../services/favorites");
-const { getSellerView } = require("../../services/sellers");
+const { toggleFavorite } = require("../../services/favorites");
+const { getItemDetailView } = require("../../services/item-view");
 
 Page({
   data: {
@@ -14,39 +10,54 @@ Page({
     item: null,
     seller: null,
     favorited: false,
-    statusLabel: ""
+    statusLabel: "",
+    availability: null,
+    favoriteBusy: false
   },
 
   onLoad(options) {
-    const item = getItemById(options.item_id);
-    if (!item) {
-      this.setData({ state: "not-found" });
-      return;
-    }
-
-    const sellerResult = getSellerView(item.seller_id);
-    this.setData({
-      state: "ready",
-      item,
-      seller: sellerResult.ok ? sellerResult.data.seller : null,
-      favorited: isFavorite(item.item_id),
-      statusLabel: ITEM_STATUS_LABELS[item.status] || item.status
-    });
+    this.itemId = options.item_id;
+    this.loadItem();
   },
 
   onShow() {
-    if (this.data.item) {
-      this.setData({ favorited: isFavorite(this.data.item.item_id) });
+    if (this.itemId) this.loadItem();
+  },
+
+  loadItem() {
+    const result = getItemDetailView(this.itemId);
+    if (!result.ok) {
+      this.setData({
+        state: "not-found",
+        item: null,
+        seller: null,
+        availability: null
+      });
+      return;
     }
+
+    this.setData({
+      state: "ready",
+      ...result.data
+    });
   },
 
   toggleFavorite() {
+    if (!this.data.item) return;
+
+    // 防快速连点：300ms 窗口内忽略重复点击（同步服务下锁需保持到窗口结束）
+    const now = Date.now();
+    if (now - (this.lastFavoriteTapAt || 0) < 300) return;
+    this.lastFavoriteTapAt = now;
+
+    this.setData({ favoriteBusy: true });
     const result = toggleFavorite(this.data.item.item_id);
     if (!result.ok) {
+      this.setData({ favoriteBusy: false });
       wx.showToast({ title: result.error.message, icon: "none" });
       return;
     }
-    this.setData({ favorited: result.data.favorite });
+    this.setData({ favorited: result.data.favorite, favoriteBusy: false });
     wx.showToast({
       title: result.data.favorite ? "已收藏" : "已取消收藏",
       icon: "none"
@@ -54,6 +65,8 @@ Page({
   },
 
   chatSeller() {
+    if (!this.data.item) return;
+
     const chat = getChatByItemId(this.data.item.item_id);
     if (!chat) {
       wx.showToast({ title: "该商品暂无 Demo 会话", icon: "none" });
@@ -68,7 +81,7 @@ Page({
       wx.navigateTo({ url: auth.redirect });
       return;
     }
-    if (this.data.item.status !== "on_sale") {
+    if (!this.data.item || this.data.item.status !== "on_sale") {
       wx.showToast({ title: "商品当前不可出价", icon: "none" });
       return;
     }
@@ -78,6 +91,7 @@ Page({
   },
 
   openSeller() {
+    if (!this.data.item) return;
     wx.navigateTo({
       url: `/pages/seller/store?seller_id=${this.data.item.seller_id}`
     });
