@@ -1,0 +1,16 @@
+# 行尾符归一化策略（Windows CRLF 兼容）
+# 文本文件统一以 LF 入库，检出时也保持 LF（保证 jj 快照视图干净）。
+* text=auto eol=lf
+
+# 二进制资源：禁止任何行尾符转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.docx binary
+*.doc binary
+*.zip binary
+*.ttf binary
