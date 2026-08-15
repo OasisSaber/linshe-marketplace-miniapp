@@ -73,3 +73,10 @@ Git 版本: 2.54.0
 - 采用范围: 与首次一致（中央调用模式 + 最小采用集合）
 - 状态差异: 测试套件已重建（2026-08-15，39 个测试覆盖 auth/items/orders/chats/data 一致性），`scripts/check.sh` 执行 `npm run ci`（结构检查 + 全部测试）；CI check.yml 已随治理文件恢复
 - 验证状态: `bash scripts/check.sh`（npm run check + npm test 39/39）通过，完整演练待后续任务补做
+
+### 治理升级（2026-08-15）
+
+- 上游: TheMasterplan v4.0.0（8895a00，PR #79）
+- 同步: core/workflow.md（新增 §0 治理所有权预检/ABSTAINED + PR 后 CI 门）、adapters/generic.md（重写为薄 Harness 边界）
+- 移除: adapters/trellis.md（上游 v4.0.0 已删除；外部交付工作流一律 ABSTAINED，不再维护兼容层）
+- 授权: 用户明确选择更新治理文件（当前会话）
