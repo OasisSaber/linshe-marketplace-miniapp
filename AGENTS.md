@@ -80,3 +80,14 @@ Git 版本: 2.54.0
 - 同步: core/workflow.md（新增 §0 治理所有权预检/ABSTAINED + PR 后 CI 门）、adapters/generic.md（重写为薄 Harness 边界）
 - 移除: adapters/trellis.md（上游 v4.0.0 已删除；外部交付工作流一律 ABSTAINED，不再维护兼容层）
 - 授权: 用户明确选择更新治理文件（当前会话）
+
+## DSH 自管（2026-08-16 接管）
+
+DSH（DeepSeek Harness）会话在本工作区的自管约定，与 TTS/Ollama/AirLLM 工作区同范式：
+
+- 管理入口: `.\manage.ps1`（status | check | test | docs | help）；输出为 ASCII，兼容 Windows PowerShell 5.1
+- 权威验证: `bash scripts/check.sh`（`npm run ci` = 结构检查 + 全部测试）；manage.ps1 check 只转发该命令，不另设验证逻辑
+- 仓库状态: jj 0.43.0 为工具基线（仓库同时有 `.git`）；当前基线分支 `restart-v0.1.0`（默认分支 `main` 只接受人类 Squash Merge）
+- 项目定位: 课程展示 Demo，已视为完成、不计划生产化开发；无常驻服务、无 npm 运行时依赖，通常无需 `npm install`
+- 边界: 不提交个人 AppID（`project.private.config.json` 已由 .gitignore 排除）、不接入真实支付/认证/后端
+- VCS 纪律: 遵循 core/workflow.md——接管类文件改动由 DSH 会话在本地完成，不自行 push/PR，交由人类决定提交方式
