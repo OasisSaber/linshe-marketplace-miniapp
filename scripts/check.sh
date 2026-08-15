@@ -4,5 +4,5 @@ set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
 
-npm run check
+npm run ci
 echo "linshe-marketplace-miniapp project validation passed."
