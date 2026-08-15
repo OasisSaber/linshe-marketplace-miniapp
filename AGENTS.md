@@ -71,5 +71,5 @@ Git 版本: 2.54.0
 - 背景: 仓库 2026-08-12 归档（archive-2026-08-12），2026-08-15 解除归档并重启开发（明确人类授权：用户选择在新基线上重新采用）
 - 新基线: `restart-v0.1.0` 分支（87cb9ef，v0.1.0 初始公开版，2026-07-23）
 - 采用范围: 与首次一致（中央调用模式 + 最小采用集合）
-- 状态差异: 测试套件待重建（test/ 不存在），`scripts/check.sh` 当前执行 `npm run check`（结构检查）；CI check.yml 已随治理文件恢复
-- 验证状态: 结构检查通过（npm run check），完整演练待测试体系重建后补做
+- 状态差异: 测试套件已重建（2026-08-15，39 个测试覆盖 auth/items/orders/chats/data 一致性），`scripts/check.sh` 执行 `npm run ci`（结构检查 + 全部测试）；CI check.yml 已随治理文件恢复
+- 验证状态: `bash scripts/check.sh`（npm run check + npm test 39/39）通过，完整演练待后续任务补做
