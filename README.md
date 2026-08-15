@@ -214,6 +214,19 @@ Code Review 中识别出的以下限制将作为 Demo 边界保留：
 
 这些行为不影响既定演示路径，但意味着项目不应直接用于真实用户、真实交易或生产环境。
 
+## 维护与自管
+
+仓库由 DSH 工作区自管，管理入口（Windows PowerShell）：
+
+```powershell
+.\manage.ps1 status   # 仓库与工具状态
+.\manage.ps1 check    # 权威验证（转发 bash scripts/check.sh → npm run ci）
+.\manage.ps1 test     # 仅运行测试套件
+.\manage.ps1 docs     # 文档清单
+```
+
+项目已按课程作业定稿，不计划继续生产化开发；详细治理规则见 `AGENTS.md`。
+
 ## 相关文档
 
 - [`DEMO_GUIDE.md`](./DEMO_GUIDE.md)：推荐演示路径、功能边界和 Debug 记录
